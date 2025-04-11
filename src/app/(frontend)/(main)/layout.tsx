@@ -26,21 +26,77 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useLoadingStore from '@/store/loadingStore';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
   const router = useRouter();
   const { loading, setLoading } = useLoadingStore();
-  let user = useUserStore((state) => state.user);
+  // let user = useUserStore((state) => state.user);
   const getUser = useUserStore((state) => state.getUser);
   const logoutUser = useUserStore((state) => state.logoutUser);
-  console.log('layout console', user);
+  const [user, setUser] = useState({});
 
- useEffect(()=>{
-  getUser()
- },[])
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get('/api/c/user/profile', { withCredentials: true });
+      console.log(`Here this is response ${JSON.stringify(response)}`);
+      setUser(JSON.stringify(response.data.data));
+
+      console.log(`Here this is SetUser ${user}`);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(`Here this is SetUser ${user}`);
+  }, []);
+
+  // console.log('layout console', user);
+
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     console.log('1');
+  //     setLoading(true);
+  //     console.log('2');
+  //     try {
+  //       console.log('3');
+  //       await getUser();
+  //       console.log('4');
+  //       if (!user) {
+  //         console.log('5');
+  //         router.push('/login');
+  //         console.log('6');
+  //       }
+  //     } catch (error) {
+  //       console.log('7');
+  //       toast.error('Please login to continue');
+  //       router.push('/login');
+  //       console.log('8');
+  //     } finally {
+  //       console.log('9');
+  //       setLoading(false);
+
+  //       console.log('10');
+  //     }
+  //   };
+
+  //   if (!user) {
+  //     console.log('11');
+  //     fetchUser();
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (!user) {
+  //     router.push('/login');
+  //   }
+  // }, [user]); // React to user changes
+
+  // if (!user) {
+  //   return <div>Loading...</div>; // Show loader while checking auth
+  // }
+
   const handleLogout = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -57,6 +113,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
+    //user layout
+
     <div className="h-screen w-full flex flex-col">
       {/* Main Content */}
       <main className="flex-1  overflow-auto  pb-20">{children}</main>
@@ -140,20 +198,20 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="z-110">
                     <DropdownMenuLabel>
-                      <h1 className="font-semibold">{ 'guest'}</h1>
-                      <h1 className="text-sm text-gray-500">{ 'guest'}</h1>
+                      <h1 className="font-semibold">{'guest'}</h1>
+                      <h1 className="text-sm text-gray-500">{'guest'}</h1>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       className="p-4 border-b-2"
-                      onClick={() => router.push('/profile')}
+                      onClick={() => router.push('/dashboard/profile')}
                     >
                       <User />
                       Profile
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       className="p-4 border-b-2"
-                      onClick={() => router.push('/profile/#subscription')}
+                      onClick={() => router.push('/dashboard/profile/#subscription')}
                     >
                       <CreditCard />
                       Billing

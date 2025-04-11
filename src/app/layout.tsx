@@ -23,25 +23,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const router = useRouter();
   const pathname = usePathname();
 
-  const isPublicPage = pathname === '/' || pathname === '/login' || pathname === '/signup';
-
-  useEffect(() => {
-    const checkUser = async () => {
-      setLoading(true);
-      await getUser();
-      const updatedUser = useUserStore.getState().user;
-
-      if (!updatedUser && !isPublicPage) {
-        router.push('/login');
-      } else if (updatedUser && isPublicPage) {
-        router.push('/dashboard');
-      }
-    };
-
-    checkUser();
-    setLoading(false);
-  }, [pathname]);
-
   return (
     <html lang="en" className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>

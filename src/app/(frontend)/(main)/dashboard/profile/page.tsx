@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/(shadcn)/ui/button';
 import { Input } from '@/components/(shadcn)/ui/input';
 import { Label } from '@/components/(shadcn)/ui/label';
@@ -10,14 +12,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/(shadcn)/ui/table';
+import useUserStore from '@/store/userStore';
 import { transactions } from '@/utils/profile.utils';
 
 export default function sessionPage() {
+  const user = useUserStore((state) => state.user);
+  // console.log(user);
+
   return (
     <section className="flex items-center  flex-col min-h-screen mb-16 mt-10">
       <span className="flex flex-col items-start justify-start w-[80%]">
-        <h1 className="">Hi Daksh</h1>
-        <h1 className="">dakshg393@gmail.com</h1>
+        <h1 className="">Hi {user?.fullName}</h1>
+        <h1 className="">{user?.email}</h1>
       </span>
       <div
         id="profile"
@@ -34,9 +40,9 @@ export default function sessionPage() {
           <h1>Profile Details</h1>
           <h2>Manage Your Profile Here</h2>
           <Label>Name</Label>
-          <Input type="text" className="w-full md:w-[50%]" />
+          <Input value={user?.fullName} type="text" className="w-full md:w-[50%]" />
           <Label>Email</Label>
-          <Input value={'dakshg393@gmail.com'} type="text" className="w-full md:w-[50%]" disabled />
+          <Input value={user?.email} type="text" className="w-full md:w-[50%]" disabled />
         </div>
       </div>
 

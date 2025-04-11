@@ -2,7 +2,7 @@ import { dbConnect } from '@/dbConfig/dbConfig';
 import { error } from 'console';
 import { NextRequest, NextResponse } from 'next/server';
 import User from '@/models/user.model.js';
-import { generateAccessAndRefreshToken } from '@/helpers/auth.helpers.ts';
+import { generateAccessAndRefreshToken } from '@/helpers/ganerateAccAndRefToken.helpers';
 
 dbConnect();
 
@@ -46,12 +46,14 @@ export const POST = async (request: NextRequest) => {
       httpOnly: true,
       sameSite: 'Strict',
       path: '/',
+      maxAge: process.env.ACCESS_TOKEN_EXPIRY * 24 * 60 * 60 * 1000,
     });
 
     response.cookies.set('accessToken', newAccessToken, {
       httpOnly: true,
       sameSite: 'Strict',
       path: '/',
+      maxAge: process.env.ACCESS_TOKEN_EXPIRY * 24 * 60 * 60 * 1000,
     });
 
     return response;
@@ -59,6 +61,6 @@ export const POST = async (request: NextRequest) => {
     // In case the user creation fails for any reason
   } catch (error: any) {
     // Catch any unexpected error
-    return NextResponse.json({ error: 'Somthing Went Wrong' }, { status: 500 }); // Internal server error
+    return NextResponse.json({ error: `Somthing Went Wrong ${error} ` }, { status: 500 }); // Internal server error
   }
 };

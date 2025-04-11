@@ -1,7 +1,7 @@
 import User from '@/models/user.model';
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
-import { generateAccessAndRefreshToken } from '@/helpers/auth.helpers';
+import { generateAccessAndRefreshToken } from '@/helpers/ganerateAccAndRefToken.helpers';
 import { apiError } from '@/lib/server/apiError';
 
 export const POST = async (request: NextRequest) => {
