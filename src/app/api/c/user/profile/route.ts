@@ -60,26 +60,64 @@ dbConnect();
 
 export async function GET(request: NextRequest) {
   try {
-    const userId = await getDataFromToken(request,"accessToken");
+    const userId = await getDataFromToken(request);
 
     if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized: No token provided' }, { status: 401 });
+      const response = NextResponse.json(
+        { error: 'Unothorize no token Provided' },
+        { status: 401 }
+      );
+
+      response.cookies.set('accessToken', '', {
+        httpOnly: true,
+        secure: true,
+        path: '/',
+        maxAge: 0,
+      });
+      response.cookies.set('refreshToken', '', {
+        httpOnly: true,
+        secure: true,
+        path: '/',
+        maxAge: 0,
+      });
+
+      return response;
     }
 
     const user = await User.findOne({ _id: userId }).select('-password -refreshToken');
 
     if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+      const response = NextResponse.json({ error: 'User Not Found' }, { status: 404 });
+
+      response.cookies.set('accessToken', '', {
+        httpOnly: true,
+        secure: true,
+        path: '/',
+        maxAge: 0,
+      });
+      response.cookies.set('refreshToken', '', {
+        httpOnly: true,
+        secure: true,
+        path: '/',
+        maxAge: 0,
+      });
+
+      return response;
     }
 
     return NextResponse.json({ message: 'User Found Successfully', data: user }, { status: 200 });
   } catch (error: any) {
-    return NextResponse.json(
-      {
-        error: `Failed to fetch user: ${error.message}`,
-        token: request.cookies.get('refreshToken')?.value || 'No refreshToken found',
-      },
-      { status: 500 }
-    );
+    const response = NextResponse.json({ error: 'Failed To Fatch User' }, { status: 401 });
+
+    // ❌ Clear cookies
+    response.cookies.set('accessToken', '', { httpOnly: true, secure: true, path: '/', maxAge: 0 });
+    response.cookies.set('refreshToken', '', {
+      httpOnly: true,
+      secure: true,
+      path: '/',
+      maxAge: 0,
+    });
+
+    return response;
   }
 }
