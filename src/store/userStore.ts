@@ -12,6 +12,7 @@ interface User {
 interface UserStore {
   user: User | null;
   loadingUser: boolean;
+  setUser: () => Promise<void>;
   getUser: () => Promise<void>;
   loginUser: (credentials: { email: string; password: string }) => Promise<any>;
   logoutUser: () => Promise<any>;
@@ -21,14 +22,19 @@ const useUserStore = create<UserStore>((set) => ({
   user: null,
   loadingUser: false,
 
+  setUser: async (data) => {
+    set({ user: data });
+  },
+
   getUser: async () => {
     set({ loadingUser: true });
     try {
-      const response = await axios.get('/api/c/user/profile',{withCredentials:true});
-      console.log(`This is response ${response.data}`)
-      set({ user: response.data, loadingUser: false });
+      const response = await axios.get('/api/c/user/profile', { withCredentials: true });
+      // console.log(`This is response ${JSON.stringify(response.data.data)}`);
+      // set({ user: response.data.data, loadingUser: false });
+      return response.data.data;
     } catch (err) {
-      console.log(`here this is error ${err}`)
+      console.log(`here this is error ${err}`);
       set({ user: null, loadingUser: false });
     }
   },
@@ -39,7 +45,7 @@ const useUserStore = create<UserStore>((set) => ({
   },
 
   logoutUser: async () => {
-    const res = await axios.get('/api/c/user/logout',{withCredentials:true});
+    const res = await axios.get('/api/c/user/logout', { withCredentials: true });
     set({ user: null });
     return res;
   },

@@ -51,7 +51,6 @@
 //   // }
 // }
 
-
 import { dbConnect } from '@/dbConfig/dbConfig';
 import User from '@/models/user.model';
 import { NextRequest, NextResponse } from 'next/server';
@@ -61,7 +60,7 @@ dbConnect();
 
 export async function GET(request: NextRequest) {
   try {
-    const userId = await getDataFromToken(request);
+    const userId = await getDataFromToken(request,"accessToken");
 
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized: No token provided' }, { status: 401 });
@@ -73,10 +72,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    return NextResponse.json(
-      { message: 'User Found Successfully', data: user },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: 'User Found Successfully', data: user }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json(
       {

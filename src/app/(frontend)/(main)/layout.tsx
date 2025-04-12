@@ -33,24 +33,26 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   const pathName = usePathname();
   const router = useRouter();
   const { loading, setLoading } = useLoadingStore();
-  // let user = useUserStore((state) => state.user);
+  let user = useUserStore((state) => state.user);
   const getUser = useUserStore((state) => state.getUser);
+  const setUser = useUserStore((state) => state.setUser);
   const logoutUser = useUserStore((state) => state.logoutUser);
-  const [user, setUser] = useState({});
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const response = await axios.get('/api/c/user/profile', { withCredentials: true });
-      console.log(`Here this is response ${JSON.stringify(response)}`);
-      setUser(JSON.stringify(response.data.data));
+  // const [user, setUser] = useState({});
 
-      console.log(`Here this is SetUser ${user}`);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const response = await axios.get('/api/c/user/profile', { withCredentials: true });
+  //     console.log(`Here this is response ${JSON.stringify(response)}`);
+  //     setUser(JSON.stringify(response.data.data));
 
-  useEffect(() => {
-    console.log(`Here this is SetUser ${user}`);
-  }, []);
+  //     console.log(`Here this is SetUser ${user}`);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(`Here this is SetUser ${user}`);
+  // }, []);
 
   // console.log('layout console', user);
 
@@ -111,6 +113,31 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       }
     }
   };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+
+        const fetchedUser = await getUser();
+
+        if (!fetchedUser) {
+          router.push('/login');
+        } else {
+          setUser(fetchedUser);
+        }
+      } catch (error) {
+        toast.error('Please login to continue');
+        router.push('/login');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (!user) {
+      fetchUser();
+    }
+  }, []);
 
   return (
     //user layout
@@ -198,8 +225,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="z-110">
                     <DropdownMenuLabel>
-                      <h1 className="font-semibold">{'guest'}</h1>
-                      <h1 className="text-sm text-gray-500">{'guest'}</h1>
+                      <h1 className="font-semibold">{user?.fullName}</h1>
+                      <h1 className="text-sm text-gray-500">{user?.email}</h1>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem

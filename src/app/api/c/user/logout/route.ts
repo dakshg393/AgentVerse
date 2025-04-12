@@ -5,10 +5,7 @@ dbConnect();
 
 export async function GET(request: NextRequest) {
   try {
-    const response = NextResponse.json(
-      { message: 'Logout User Successfully' },
-      { status: 200 }
-    );
+    const response = NextResponse.json({ message: 'Logout User Successfully' }, { status: 200 });
 
     // Clear cookies by setting them to empty and expiring them
     response.cookies.set('refreshToken', '', {
