@@ -2,12 +2,16 @@ import { dbConnect } from '@/dbConfig/dbConfig';
 import { error } from 'console';
 import { NextRequest, NextResponse } from 'next/server';
 import User from '@/models/user.model.js';
-import { generateAccessAndRefreshToken } from '@/helpers/ganerateAccAndRefToken.helpers';
+import { generateAccessAndRefreshToken } from '@/helpers/generateAccAndRefToken.helpers';
+import ms from 'ms';
 
 dbConnect();
 
 export const POST = async (request: NextRequest) => {
   try {
+    const accessTokenExpiry = ms(process.env.ACCESS_TOKEN_EXPIRY || '1d');
+    const refreshTokenExpiry = ms(process.env.REFRESH_TOKEN_EXPIRY || '7d');
+
     const reqBody = await request.json();
     const { email, password } = reqBody;
     console.log(1);
@@ -46,14 +50,14 @@ export const POST = async (request: NextRequest) => {
       httpOnly: true,
       sameSite: 'Strict',
       path: '/',
-      maxAge: process.env.ACCESS_TOKEN_EXPIRY * 24 * 60 * 60 * 1000,
+      maxAge: accessTokenExpiry,
     });
 
     response.cookies.set('accessToken', newAccessToken, {
       httpOnly: true,
       sameSite: 'Strict',
       path: '/',
-      maxAge: process.env.ACCESS_TOKEN_EXPIRY * 24 * 60 * 60 * 1000,
+      maxAge: refreshTokenExpiry,
     });
 
     return response;

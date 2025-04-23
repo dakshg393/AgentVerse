@@ -18,7 +18,7 @@ const sessionSchema = new Schema(
     agentTypeRef: {
       type: String,
       required: true,
-      enum: ['InterviewAgent', 'HelthcareAgent', 'LegalAgent'],
+      enum: ['Interview', 'HelthcareAgent', 'LegalAgent'],
     },
     domainData: {
       type: mongoose.Schema.Types.ObjectId,
@@ -28,6 +28,6 @@ const sessionSchema = new Schema(
   { timestamps: true }
 );
 
-const Session = mongoose.models.sessions || mongoose.model('session', sessionSchema);
+const Session = mongoose.models.sessions || mongoose.model('sessions', sessionSchema);
 
 export default Session;

@@ -11,7 +11,7 @@ import { Plans } from '@/utils/subscription.utils';
 import { features } from 'process';
 export default function subscriptionPage() {
   return (
-    <section className="flex items-center justify-center flex-col  min-h-screen mb-16">
+    <section className="flex items-center justify-center flex-col  p-4 min-h-screen pb-16">
       <h1>Choose Your Plan That Best For You</h1>
       <div className="flex justify-center items-center flex-col md:flex-row gap-4">
         {Plans.map((plan) => {

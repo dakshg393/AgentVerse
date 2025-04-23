@@ -142,12 +142,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   return (
     //user layout
 
-    <div className="h-screen w-full flex flex-col">
+    <div className="h-screen w-full flex flex-col ">
       {/* Main Content */}
       <main className="flex-1  overflow-auto  pb-20">{children}</main>
 
       {/* Bottom Navigation (Fixed) */}
-      <nav className=" flex items-center justify-center fixed bottom-0 left-1/2 transform -translate-x-1/2 p-4 md:pb-4 rounded-lg shadow-lg border-2  w-[95%] sm:w-auto backdrop-blur-3xl z-100">
+      <nav className=" flex items-center justify-center fixed bottom-0 md:bottom-4 left-1/2 transform -translate-x-1/2 p-4 md:pb-4 rounded-lg shadow-lg border-2  w-[95%] sm:w-auto backdrop-blur-3xl z-100">
         <NavigationMenu>
           <NavigationMenuList className="flex flex-wrap justify-center md:flex-nowrap gap-2 md:gap-4">
             {/* Profile Avatar */}

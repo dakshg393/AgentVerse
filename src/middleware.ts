@@ -45,9 +45,10 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isPublicPath = ['/login', '/signup', '/'].includes(path);
   const accessToken = request.cookies.get('accessToken')?.value;
+  const refreshToken = request.cookies.get('refreshToken')?.value;
 
   // Prevent infinite redirects
-  if (accessToken) {
+  if (accessToken || refreshToken) {
     if (isPublicPath) {
       return NextResponse.redirect(new URL('/dashboard', request.url));
     }

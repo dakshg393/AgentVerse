@@ -10,10 +10,13 @@ const interviewSchema = new Schema(
     },
     avatar: {
       type: String,
-      enum: ['Male', 'Female'],
+      enum: ['male', 'female'],
     },
     resume: {
       type: [String],
+    },
+    yearOfExperience: {
+      type: Number,
     },
     skills: {
       type: String,
@@ -25,6 +28,6 @@ const interviewSchema = new Schema(
   { timestamps: true }
 );
 
-const Interview = mongoose.models.interviews || mongoose.model('interview', interviewSchema);
+const Interview = mongoose.models.interviews || mongoose.model('interviews', interviewSchema);
 
 export default Interview;
