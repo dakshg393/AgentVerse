@@ -22,3 +22,7 @@ const historySchema = new Schema(
   },
   { timestamps: true }
 );
+
+const History = mongoose.models.Historys || mongoose.model('Historys', historySchema);
+
+export default History;

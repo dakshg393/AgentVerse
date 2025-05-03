@@ -1,5 +1,5 @@
 import User from '@/models/user.model';
-import { apiError } from '@/lib/server/apiError.ts';
+import { apiError } from '@/lib/server/apiError';
 import { dbConnect } from '@/dbConfig/dbConfig';
 
 dbConnect();

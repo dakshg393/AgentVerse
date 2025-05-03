@@ -34,7 +34,7 @@ export default function InterviewSetup() {
     try {
       // const formData = new FormData();
 
-      const response = await axios.post('/api/c/agents/interviewAgent', { data, user });
+      const response = await axios.post('/api/c/c/agents/interviewAgent', { data, user });
       // console.log('Here this is response', JSON.stringify(response));
       toast.success(response.data.message);
       router.push(`/dashboard/interviewer/session/${response?.data?.data?._id}`);

@@ -15,31 +15,6 @@ import * as THREE from 'three';
 import FOG from 'vanta/dist/vanta.fog.min'; // Change to your preferred effect
 
 export default function LandingPage() {
-  const sectionRef = useRef(null);
-  const [vantaEffect, setVantaEffect] = useState(null);
-
-  useEffect(() => {
-    if (!vantaEffect) {
-      setVantaEffect(
-        FOG({
-          el: sectionRef.current,
-          THREE,
-          mouseControls: true,
-          touchControls: true,
-          minHeight: 100.0,
-          minWidth: 100.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          color: 0x00ffff,
-          backgroundColor: 0x111111,
-        })
-      );
-    }
-    return () => {
-      if (vantaEffect) vantaEffect.destroy();
-    };
-  }, [vantaEffect]);
-
   return (
     <div className="flex items-center justify-center flex-col p-0 m-0 overflow-x-hidden">
       {/* Navbar */}
@@ -49,10 +24,10 @@ export default function LandingPage() {
           <NavigationMenuList className="flex items-center gap-3">
             <NavigationMenuItem className="flex items-center justify-center flex-row gap-2">
               <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarImage src="/logo.jpeg" />
+                <AvatarFallback>AV</AvatarFallback>
               </Avatar>
-              <h1 className="font-bold text-2xl">Convonex</h1>
+              <h1 className="font-bold text-2xl">AgentVerse </h1>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
@@ -62,16 +37,25 @@ export default function LandingPage() {
           <NavigationMenuList className="flex items-center gap-4">
             <NavigationMenuItem>
               <Link href="/login" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <h1>Login</h1>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()}  bg-transparent font-bold text-md  hover:bg-transparent hover:text-pink-400 hover:underline decoration-2 underline-offset-8  `}
+                >
+                  Login
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
 
-            <NavigationMenuItem>
+            <NavigationMenuItem className="hover:shadow-pink-400/50">
               <Link href="/signup" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <h1>Signup</h1>
+                <NavigationMenuLink
+                  className={`    ${navigationMenuTriggerStyle()}
+        bg-pink-400 
+        hover:bg-pink-400 
+        hover:shadow-lg 
+        hover:shadow-pink-400/50 
+        transition `}
+                >
+                  <h1>Try It Out</h1>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -81,8 +65,17 @@ export default function LandingPage() {
 
       {/* Sections */}
 
-      <section ref={sectionRef} className="min-h-screen w-screen flex items-center justify-center">
-        <h1 className="text-8xl">Talk To Your agent now</h1>
+      <section
+        className="min-h-screen w-screen flex items-center justify-center p-20 flex-wrap"
+        style={{
+          background: 'linear-gradient(135deg, #22222E 0%, #3A2B52 100%)',
+        }}
+      >
+        <h1 className="text-7xl text-center font-extrabold ">
+          {' '}
+          Experience the Power <br />
+          of Human-like AI Interaction
+        </h1>
       </section>
     </div>
   );

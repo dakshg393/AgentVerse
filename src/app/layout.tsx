@@ -25,6 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="icon" href="/Logo.jpeg" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Toaster
           position="top-center"

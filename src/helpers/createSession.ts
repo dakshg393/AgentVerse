@@ -1,5 +1,5 @@
 import { dbConnect } from '@/dbConfig/dbConfig';
-import Session from '@/models/(sessionAndAgents)/session.model';
+import Session from '@/models/session.model';
 import { NextResponse } from 'next/server';
 
 dbConnect();

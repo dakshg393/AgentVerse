@@ -38,67 +38,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   const setUser = useUserStore((state) => state.setUser);
   const logoutUser = useUserStore((state) => state.logoutUser);
 
-  // const [user, setUser] = useState({});
-
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const response = await axios.get('/api/c/user/profile', { withCredentials: true });
-  //     console.log(`Here this is response ${JSON.stringify(response)}`);
-  //     setUser(JSON.stringify(response.data.data));
-
-  //     console.log(`Here this is SetUser ${user}`);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(`Here this is SetUser ${user}`);
-  // }, []);
-
-  // console.log('layout console', user);
-
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     console.log('1');
-  //     setLoading(true);
-  //     console.log('2');
-  //     try {
-  //       console.log('3');
-  //       await getUser();
-  //       console.log('4');
-  //       if (!user) {
-  //         console.log('5');
-  //         router.push('/login');
-  //         console.log('6');
-  //       }
-  //     } catch (error) {
-  //       console.log('7');
-  //       toast.error('Please login to continue');
-  //       router.push('/login');
-  //       console.log('8');
-  //     } finally {
-  //       console.log('9');
-  //       setLoading(false);
-
-  //       console.log('10');
-  //     }
-  //   };
-
-  //   if (!user) {
-  //     console.log('11');
-  //     fetchUser();
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     router.push('/login');
-  //   }
-  // }, [user]); // React to user changes
-
-  // if (!user) {
-  //   return <div>Loading...</div>; // Show loader while checking auth
-  // }
-
   const handleLogout = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -120,7 +59,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         setLoading(true);
 
         const fetchedUser = await getUser();
-
+        console.log(fetchUser);
         if (!fetchedUser) {
           router.push('/login');
         } else {
@@ -142,20 +81,20 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   return (
     //user layout
 
-    <div className="h-screen w-full flex flex-col ">
+    <div className="h-screen w-full flex flex-col  ">
       {/* Main Content */}
-      <main className="flex-1  overflow-auto  pb-20">{children}</main>
+      <main className="flex-1  overflow-auto pb-16  ">{children}</main>
 
       {/* Bottom Navigation (Fixed) */}
-      <nav className=" flex items-center justify-center fixed bottom-0 md:bottom-4 left-1/2 transform -translate-x-1/2 p-4 md:pb-4 rounded-lg shadow-lg border-2  w-[95%] sm:w-auto backdrop-blur-3xl z-100">
+      <nav className=" flex items-center justify-center fixed bottom-0 md:bottom-4 left-1/2 transform -translate-x-1/2 p-4  rounded-lg shadow-lg border-2  w-[95%] sm:w-auto backdrop-blur-3xl z-100">
         <NavigationMenu>
           <NavigationMenuList className="flex flex-wrap justify-center md:flex-nowrap gap-2 md:gap-4">
             {/* Profile Avatar */}
-            <NavigationMenuItem className="border-r-2 border-amber-500 hidden sm:flex  pr-4">
+            <NavigationMenuItem className="border-r-2 border-pink-600 hidden sm:flex  pr-4">
               <Link href="/dashboard" legacyBehavior passHref className="bg-transparent">
                 <Avatar className="bg-transparent">
-                  <AvatarImage className="bg-transparent" src="https://github.com/shadcn.png" />
-                  <AvatarFallback className="bg-transparent">CN</AvatarFallback>
+                  <AvatarImage className="bg-transparent" src="/logo.jpeg" />
+                  <AvatarFallback className="bg-transparent">AV</AvatarFallback>
                 </Avatar>
               </Link>
             </NavigationMenuItem>
@@ -164,16 +103,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             {navItems.map((item, index) => {
               const isActive = item.href === pathName;
               return (
-                <NavigationMenuItem key={index} className=" ">
+                <NavigationMenuItem key={index} className={`${isActive ? 'text-[#ff007f]' : ''}`}>
                   <Link href={item.href} legacyBehavior passHref className="">
                     <NavigationMenuLink
-                      className={`${navigationMenuTriggerStyle()} flex items-center justify-center bg-transparent  flex-col ${isActive ? 'text-[#ff007f]' : 'text-white'}`}
+                      className={`${navigationMenuTriggerStyle()} flex items-center justify-center bg-transparent  flex-col `}
                     >
                       <div className="flex items-center justify-center flex-col">
-                        <item.icon
-                          size={40}
-                          className={`${isActive ? 'text-[#ff007f] ' : 'text-white'}`}
-                        />
+                        <item.icon size={5} className={`${isActive ? 'text-[#ff007f] ' : ''}`} />
                         <span className="hidden sm:flex">{item.title}</span>
                       </div>
                     </NavigationMenuLink>
@@ -189,10 +125,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               >
                 <DropdownMenu>
                   <DropdownMenuTrigger>
-                    <Bell
-                      size={20}
-                      className={`hover:text-[#ff007f] text-white hover:cursor-pointer`}
-                    />
+                    <Bell size={20} className={`hover:text-[#ff007f]  hover:cursor-pointer`} />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="z-110">
                     <DropdownMenuLabel className="p-4">
@@ -218,10 +151,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               >
                 <DropdownMenu>
                   <DropdownMenuTrigger>
-                    <Settings
-                      size={50}
-                      className={`hover:text-[#ff007f]  text-white hover:cursor-pointer`}
-                    />
+                    <Settings size={50} className={`hover:text-[#ff007f]   hover:cursor-pointer`} />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="z-110">
                     <DropdownMenuLabel>
@@ -230,22 +160,28 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
-                      className="p-4 border-b-2"
+                      className="p-4 border-b-2  "
                       onClick={() => router.push('/dashboard/profile')}
                     >
-                      <User />
-                      Profile
+                      <span className="flex items-center gap-2 hover:text-[#ff007f]">
+                        <User className="hover:text-[#ff007f]" />
+                        Profile
+                      </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="p-4 border-b-2"
+                      className="p-4 border-b-2  "
                       onClick={() => router.push('/dashboard/profile/#subscription')}
                     >
-                      <CreditCard />
-                      Billing
+                      <span className="flex items-center gap-2 hover:text-[#ff007f]">
+                        <CreditCard className="hover:text-[#ff007f]" />
+                        Billing
+                      </span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="p-4" onClick={handleLogout}>
-                      <LogOut />
-                      Logout
+                    <DropdownMenuItem className="p-4 hover:text-[#ff007f]  " onClick={handleLogout}>
+                      <span className="flex items-center gap-2 hover:text-[#ff007f]">
+                        <LogOut className="hover:text-[#ff007f]" />
+                        Logout
+                      </span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

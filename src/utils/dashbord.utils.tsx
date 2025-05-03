@@ -1,41 +1,47 @@
-import { Brain, Stethoscope, MessageSquare, Scale, Code, Wallet } from 'lucide-react';
+import { BookOpen, Bot, Gavel, LineChart, Mic, Stethoscope } from 'lucide-react';
 
 const aiServices = [
   {
-    title: 'AI Interview  ',
-    icon: Brain,
+    title: 'Interview Pro',
+    icon: Mic,
     href: '/dashboard/interviewer',
-    color: 'text-blue-500 border-blue-500',
+    color: 'linear-gradient(to right, #4F46E5, #7C3AED)',
+    tagline: 'Nail your dream job with mock interviews & feedback',
   },
   {
-    title: 'AI Health Assistant  \n Comming Soon...',
+    title: 'Health Guide',
     icon: Stethoscope,
     href: '/ai-health',
-    color: 'text-teal-500 border-teal-500 ',
+    color: 'linear-gradient(to right, #10B981, #06D6A0) ',
+    tagline: '24/7 medical advice & wellness tips',
   },
   {
-    title: 'AI Consultant  \n Comming Soon...',
-    icon: MessageSquare,
+    title: 'Legal Expert',
+    icon: Gavel,
     href: '/ai-consulting',
-    color: 'text-purple-500 border-purple-500 ',
+    color: ' linear-gradient(to right, #2563EB, #3B82F6) ',
+    tagline: 'Instant contract reviews & legal insights',
   },
   {
-    title: 'AI Legal Advisor  \n Comming Soon...',
-    icon: Scale,
+    title: 'EduBot',
+    icon: BookOpen,
     href: '/ai-legal',
-    color: 'text-amber-500  border-amber-500 ',
+    color: 'linear-gradient(to right, #F59E0B, #FBBF24) ',
+    tagline: 'Personalized learning for any subject',
   },
   {
-    title: 'AI Code Reviewer  \n Comming Soon...',
-    icon: Code,
+    title: 'Finance Genie',
+    icon: LineChart,
     href: '/ai-code-review',
-    color: 'text-pink-500 border-pink-500  ',
+    color: 'linear-gradient(135deg, #4B5563, #9CA3AF)',
+    tagline: 'Smart budgeting, investment tips & tax hacks',
   },
   {
-    title: 'AI Personal Finance \n Comming Soon...',
-    icon: Wallet,
+    title: 'Custom AI',
+    icon: Bot,
     href: '/ai-finance',
-    color: 'text-green-500 border-green-500 ',
+    color: 'linear-gradient(to right, #EC4899, #F472B6) ',
+    tagline: 'Build and configure your talking carecter',
   },
 ];
 

@@ -42,22 +42,30 @@ export default function Dashboard() {
   // }, [vantaEffect]);
 
   return (
-    <section className="flex items-center justify-center flex-col min-h-screen pb-16">
-      <span className="text-4xl md:text8xl text-center">
-        <h1 className="">Your Personal Ai Agents</h1>
-        <h1 className="">Ready To Talk</h1>
+    <section className="flex items-center justify-center flex-col min-h-screen  bg-[url('/bgimg2.jpeg')] bg-no-repeat bg-cover bg-center">
+      <span className="mt-10 ">
+        <h1 class="text-6xl font-extrabold font-montserrat text-transparent text-center leading-tight bg-gradient-to-r from-white from-[1%] to-pink-600 to-[99%] bg-clip-text  ">
+          Meet Your AI Experts
+        </h1>
+        <p class="mt-4 text-2xl font-medium text-gray-300 text-center">
+          Always here to help – smart, fast & personalized
+        </p>
       </span>
 
       <div className="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-[80%] md:w-[50%] justify-center ">
         {aiServices.map((service, index) => (
           <Card
             key={index}
-            className={`cursor-pointer hover:shadow-lg backdrop-blur-3xl bg-black/50  ${service.color}`}
+            className={`cursor-pointer hover:shadow-lg hover:scale-108 hover:border-pink-600 border-white  backdrop-blur-xs bg-transparent w-80% h-80% text-center `}
             onClick={() => router.push(service.href)}
           >
-            <CardHeader className="flex flex-col items-center">
-              <service.icon size={40} />
-              <CardTitle className="mt-2 text-lg font-semibold">{service.title}</CardTitle>
+            <CardHeader className="flex flex-col items-center ">
+              <span className=" p-4  rounded-full " style={{ backgroundImage: service.color }}>
+                <service.icon size={30} />
+              </span>
+
+              <CardTitle className="mt-2 text-lg font-semibold">{service.title || ''}</CardTitle>
+              <p>{service.tagline || ''}</p>
             </CardHeader>
           </Card>
         ))}
