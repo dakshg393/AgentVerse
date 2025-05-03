@@ -15,7 +15,7 @@ import {
 import useUserStore from '@/store/userStore';
 import { transactions } from '@/utils/profile.utils';
 
-export default function sessionPage() {
+export default function ProfilePage() {
   const user = useUserStore((state) => state.user);
   // console.log(user);
 

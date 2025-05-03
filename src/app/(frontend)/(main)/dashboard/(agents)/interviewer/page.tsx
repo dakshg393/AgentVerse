@@ -16,7 +16,7 @@ import axios from 'axios';
 import useUserStore from '@/store/userStore';
 import toast from 'react-hot-toast';
 
-export default function InterviewSetup() {
+export default function InterviewSession() {
   const router = useRouter();
 
   const user = useUserStore((state) => state.user);

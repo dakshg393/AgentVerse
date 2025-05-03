@@ -9,7 +9,7 @@ import {
 } from '@/components/(shadcn)/ui/card';
 import { Plans } from '@/utils/subscription.utils';
 import { features } from 'process';
-export default function subscriptionPage() {
+export default function SubscriptionPage() {
   return (
     <section className="flex items-center justify-center flex-col  p-4 min-h-screen pb-16">
       <h1>Choose Your Plan That Best For You</h1>

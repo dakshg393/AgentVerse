@@ -11,7 +11,7 @@ import { Input } from '@/components/(shadcn)/ui/input';
 import { Label } from '@/components/(shadcn)/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/(shadcn)/ui/card';
 
-export default function signupPage() {
+export default function SignupPage() {
   const router = useRouter();
 
   const [name, setName] = useState('');
