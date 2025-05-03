@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { transports } from '@/lib/mcp-server';
+import { transports } from '@/lib/server/(mcp)/mcp-server.js';
 
 export async function POST(request) {
   const { searchParams } = new URL(request.url);
