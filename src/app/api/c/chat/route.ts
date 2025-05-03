@@ -15,7 +15,7 @@ async function initializeMCP() {
       version: '1.0.0',
     });
 
-    await mcpClient.connect(new SSEClientTransport(new URL('http://localhost:3001/sse')));
+    await mcpClient.connect(new SSEClientTransport(new URL(process.env.MCP_SERVER_URL)));
 
     const toolsResponse = await mcpClient.listTools();
     tools = toolsResponse.tools.map((tool) => ({
