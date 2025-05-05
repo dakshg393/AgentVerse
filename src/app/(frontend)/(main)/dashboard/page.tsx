@@ -42,7 +42,7 @@ export default function Dashboard() {
   // }, [vantaEffect]);
 
   return (
-    <section className="flex items-center justify-center flex-col min-h-screen  bg-[url('/bgimg2.jpeg')] bg-no-repeat bg-cover bg-center">
+    <section className="flex items-center pb-16 justify-center flex-col min-h-screen  bg-[url('/bgimg2.jpeg')] bg-no-repeat bg-cover bg-center">
       <span className="mt-10 ">
         <h1 class="text-6xl font-extrabold font-montserrat text-transparent text-center leading-tight bg-gradient-to-r from-white from-[1%] to-pink-600 to-[99%] bg-clip-text  ">
           Meet Your AI Experts
