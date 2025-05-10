@@ -258,7 +258,7 @@
 
 'use client';
 import { Button } from '@/components/(shadcn)/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/(shadcn)/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/(shadcn)/ui/card';
 import { useEffect, useRef, useState } from 'react';
 import { Camera, CameraOff, Mic, MicOff, PlayCircleIcon, StopCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -354,24 +354,42 @@ export default function InterviewPage() {
       }
     };
 
-    mediaRecorder.onstop = async () => {
+    // mediaRecorder.onstop = async () => {
+    //   const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+    //   const message = await transcribeAudio(audioBlob);
+
+    //   try {
+    //     const response = await axios.post('/api/c/chat', {
+    //       message: message,
+    //     });
+
+    //     if (response.data?.response) {
+    //       speakText(response.data.response);
+    //     }
+    //   } catch (error) {
+    //     console.log('API call failed:', error);
+    //     toast.error('Failed to Communicate with Virtual Agent');
+    //   }
+    // };
+
+    mediaRecorder.onstop = () => {
       const audioBlob = new Blob(chunks, { type: 'audio/webm' });
-      const message = await transcribeAudio(audioBlob);
-
-      try {
-        const response = await axios.post('/api/c/chat', {
-          message: message,
-        });
-
-        if (response.data?.response) {
-          speakText(response.data.response);
+    
+      // Run async code outside of the event handler
+      (async () => {
+        const message = await transcribeAudio(audioBlob);
+        try {
+          const response = await axios.post('/api/c/chat', { message });
+          if (response.data?.response) {
+            speakText(response.data.response);
+          }
+        } catch (error) {
+          console.log('API call failed:', error);
+          toast.error('Failed to Communicate with Virtual Agent');
         }
-      } catch (error) {
-        console.error('API call failed:', error);
-        toast.error('Failed to Communicate with Virtual Agent');
-      }
+      })();
     };
-
+    
     mediaRecorder.start(500);
     setIsRecording(true);
   };

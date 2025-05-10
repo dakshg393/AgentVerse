@@ -160,7 +160,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
-                      className="p-4 border-b-2  "
+                      className="p-4 border-b-2  cursor-pointer"
                       onClick={() => router.push('/dashboard/profile')}
                     >
                       <span className="flex items-center gap-2 hover:text-[#ff007f]">
@@ -169,7 +169,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                       </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="p-4 border-b-2  "
+                      className="p-4 border-b-2  cursor-pointer"
                       onClick={() => router.push('/dashboard/profile/#subscription')}
                     >
                       <span className="flex items-center gap-2 hover:text-[#ff007f]">
@@ -177,7 +177,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                         Billing
                       </span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="p-4 hover:text-[#ff007f]  " onClick={handleLogout}>
+                    <DropdownMenuItem className="p-4 hover:text-[#ff007f] cursor-pointer " onClick={handleLogout}>
                       <span className="flex items-center gap-2 hover:text-[#ff007f]">
                         <LogOut className="hover:text-[#ff007f]" />
                         Logout

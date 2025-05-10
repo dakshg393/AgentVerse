@@ -42,12 +42,12 @@ export default function Dashboard() {
   // }, [vantaEffect]);
 
   return (
-    <section className="flex items-center pb-16 justify-center flex-col min-h-screen  bg-[url('/bgimg2.jpeg')] bg-no-repeat bg-cover bg-center">
+    <section className="flex items-center pb-16 justify-center flex-col min-h-screen bg-gradient-to-b  to-pink-300 bg-no-repeat bg-cover bg-center">
       <span className="mt-10 ">
-        <h1 class="text-6xl font-extrabold font-montserrat text-transparent text-center leading-tight bg-gradient-to-r from-white from-[1%] to-pink-600 to-[99%] bg-clip-text  ">
+        <h1 class="text-6xl font-extrabold font-montserrat text-transparent text-center leading-tight bg-gradient-to-r  dark:from-white from-black from-20% to-pink-600 to-[80%] bg-clip-text  ">
           Meet Your AI Experts
         </h1>
-        <p class="mt-4 text-2xl font-medium text-gray-300 text-center">
+        <p class="mt-4 text-2xl font-medium  text-center">
           Always here to help – smart, fast & personalized
         </p>
       </span>
@@ -56,7 +56,7 @@ export default function Dashboard() {
         {aiServices.map((service, index) => (
           <Card
             key={index}
-            className={`cursor-pointer hover:shadow-lg hover:scale-108 hover:border-pink-600 border-white  backdrop-blur-xs bg-transparent w-80% h-80% text-center `}
+            className={`cursor-pointer hover:shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:border-pink-600 border-white  backdrop-blur-xs bg-transparent w-80% h-80% text-center `}
             onClick={() => router.push(service.href)}
           >
             <CardHeader className="flex flex-col items-center ">

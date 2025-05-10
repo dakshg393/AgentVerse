@@ -3,13 +3,10 @@
 import { Button } from '@/components/(shadcn)/ui/button';
 import { Input } from '@/components/(shadcn)/ui/input';
 import { Label } from '@/components/(shadcn)/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/(shadcn)/ui/radio-group';
+import { RadioGroup } from '@/components/(shadcn)/ui/radio-group';
 
-import { Switch } from '@/components/(shadcn)/ui/switch';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/(shadcn)/ui/card';
 import { Textarea } from '@/components/(shadcn)/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/(shadcn)/ui/avatar';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -23,7 +20,6 @@ export default function InterviewSession() {
   const {
     register,
     handleSubmit,
-    setValue,
     watch,
     formState: { errors },
   } = useForm();
@@ -37,7 +33,7 @@ export default function InterviewSession() {
       const response = await axios.post('/api/c/c/agents/interviewAgent', { data, user });
       // console.log('Here this is response', JSON.stringify(response));
       toast.success(response.data.message);
-      router.push(`/dashboard/interviewer/session/${response?.data?.data?._id}`);
+      router.push(`/dashboard/sessions/session/${response?.data?.data?._id}`);
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message);
@@ -111,53 +107,7 @@ export default function InterviewSession() {
                 </Avatar>
               </label>
 
-              <label className="cursor-pointer">
-                <input type="radio" value="female" className="hidden" {...register('avatar')} />
-                <Avatar
-                  className={`rounded-sm h-18 w-28 border-2 ${
-                    watch('avatar') === 'female' ? 'border-amber-500' : 'border-transparent'
-                  }`}
-                >
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </label>
-
-              <label className="cursor-pointer">
-                <input type="radio" value="female" className="hidden" {...register('avatar')} />
-                <Avatar
-                  className={`rounded-sm h-18 w-28 border-2 ${
-                    watch('avatar') === 'female' ? 'border-amber-500' : 'border-transparent'
-                  }`}
-                >
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </label>
-
-              <label className="cursor-pointer">
-                <input type="radio" value="female" className="hidden" {...register('avatar')} />
-                <Avatar
-                  className={`rounded-sm h-18 w-28 border-2 ${
-                    watch('avatar') === 'female' ? 'border-amber-500' : 'border-transparent'
-                  }`}
-                >
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </label>
-
-              <label className="cursor-pointer">
-                <input type="radio" value="female" className="hidden" {...register('avatar')} />
-                <Avatar
-                  className={`rounded-sm h-18 w-28 border-2 ${
-                    watch('avatar') === 'female' ? 'border-amber-500' : 'border-transparent'
-                  }`}
-                >
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </label>
+            
             </RadioGroup>
             {errors.avatar && <p className="text-red-500">{errors.avatar.message}</p>}
             <Label>Resume</Label>

@@ -37,7 +37,7 @@ export default function SessionPage() {
       {sessions.map((session)=>(
 
     
-<Card className="max-w-60 max-h-80">
+<Card className="w-80 h-60">
 <CardHeader>
     {session.title}
 </CardHeader>

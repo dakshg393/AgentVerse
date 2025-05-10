@@ -3,7 +3,7 @@ import { Users, History, CreditCard, BarChart2, Settings, LayoutGrid } from 'luc
 
 const navItems = [
   { title: 'Dashboard', href: '/dashboard', icon: LayoutGrid, color: 'blue' },
-  { title: 'Sessions', href: '/dashboard/session', icon: History, color: 'blue' },
+  { title: 'Sessions', href: '/dashboard/sessions', icon: History, color: 'blue' },
   { title: 'Subscription', href: '/dashboard/subscription', icon: CreditCard, color: 'blue' },
 ];
 

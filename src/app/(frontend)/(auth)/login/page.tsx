@@ -23,7 +23,7 @@ export default function LoginPage() {
       const response = await axios.post('/api/c/auth/login', { email, password });
       toast.success(response.data.message || 'Login successful');
       router.push('/dashboard');
-    } catch (error: any) {
+    } catch (error:unknown) {
       if (error.response) {
         if (error.response.status === 401) {
           toast.error('Invalid email or password');
@@ -75,7 +75,7 @@ export default function LoginPage() {
             </Button>
           </form>
           <p className="text-center text-sm mt-4">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/signup" className="text-blue-600 hover:underline">
               Sign up
             </Link>

@@ -1,4 +1,4 @@
-const feqs =[
+const faqs =[
         {
           "question": "What is AgentVerse?",
           "answer": "AgentVerse is an AI-powered SaaS platform that allows users to create and interact with virtual agents in real time. These agents can act as interviewers, healthcare advisors, legal consultants, and more."
@@ -43,6 +43,83 @@ const feqs =[
       
   
   
+export const whyUsData = [
+    {
+      feature: "Multi-Agent Support",
+      agentverse: "✅ Yes – Domain-specific agents (Interview, Healthcare, Legal)",
+      chatgpt: "❌ Single general-purpose agent",
+      others: "❌ Mostly limited to one agent",
+    },
+    {
+      feature: "Real-time Voice Interaction",
+      agentverse: "✅ Yes – Live voice & character-based agents",
+      chatgpt: "⚠️ Only in Plus version (limited)",
+      others: "❌ Not commonly supported",
+    },
+    {
+      feature: "Agent Customization",
+      agentverse: "✅ Users can configure roles, tone, and logic",
+      chatgpt: "❌ Very limited personalization",
+      others: "⚠️ Requires complex setup",
+    },
+    {
+      feature: "Industry-specific Expertise",
+      agentverse: "✅ Pre-trained for interviews, healthcare, legal, etc.",
+      chatgpt: "❌ Generalist, lacks niche expertise",
+      others: "⚠️ Needs fine-tuning",
+    },
+    {
+      feature: "Embeddable in Apps/Web",
+      agentverse: "✅ Easily embeddable via widget/API",
+      chatgpt: "❌ Not embeddable",
+      others: "⚠️ Varies widely",
+    },
+    {
+      feature: "Analytics and Logs",
+      agentverse: "✅ Built-in session tracking and logs",
+      chatgpt: "❌ Not available",
+      others: "⚠️ Needs third-party integration",
+    },
+  ];
+  
+const testimonials = [
+  { name: "Ananya Mehta", role: "Job Seeker", quote: "Agentverse’s interview agent felt like a real mock interviewer. The feedback report was spot on.", featured: true },
+  { name: "Dr. Ravi Kulkarni", role: "Health Consultant", quote: "The health agent gives personalized insights—great use of AI context!", featured: true },
+  { name: "Neha Shah", role: "Career Coach", quote: "Finally, an AI that’s configurable and gives actionable post-session feedback." },
+  { name: "Arjun Rao", role: "Founder, EduLeap", quote: "We plan to embed Agentverse into our platform. The API-first design is a win." },
+  { name: "Fatima Ansari", role: "Law Intern", quote: "The legal assistant helped me prep for my moot court with accurate guidance." },
+  { name: "Daniel Roy", role: "Tech Lead, InterviewPad", quote: "Real-time voice interaction with LLM-backed responses is a game-changer." },
+  { name: "Shruti Gupta", role: "Freelancer", quote: "Custom AI agents with voice and transcript history? It's like having a smart assistant on demand." },
+  { name: "Mohammed Bilal", role: "CS Student", quote: "The platform helped me ace my internship interviews—thank you Agentverse!" },
+  { name: "Tanvi Kapoor", role: "UX Researcher", quote: "The smooth, responsive UI and session insights make this stand out." },
+  { name: "Nikhil Arora", role: "Startup Mentor", quote: "Multi-agent system with real feedback reporting is perfect for guided learning." },
+  { name: "Elena Costa", role: "Voice Tech Enthusiast", quote: "Voice-to-AI interaction that just works—no lag, no noise, just context." },
+  { name: "Kabir Malhotra", role: "HR Professional", quote: "Perfect for conducting mock interviews and skill assessments with feedback." },
+];
 
+  
 
-  export {feqs}
+  const agentsOverview = [
+    {
+      url:"/demovideo1.mp4",
+      discription:"This is interview ai this will help you to crete interview"
+    },
+    {
+      url:"/demovideo1.mp4",
+      discription:"This is interview ai this will help you to crete interview"
+    },
+    {
+      url:"/demovideo1.mp4",
+      discription:"This is interview ai this will help you to crete interview"
+    },
+    {
+      url:"/demovideo1.mp4",
+      discription:"This is interview ai this will help you to crete interview"
+    },
+    {
+      url:"/demovideo1.mp4",
+      discription:"This is interview ai this will help you to crete interview"
+    }
+  ];
+
+  export {faqs,whyUsData,testimonials,agentsOverview}

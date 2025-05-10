@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { PassThrough } from 'stream';
 import { Button } from '@/components/(shadcn)/ui/button';
 
 import { Input } from '@/components/(shadcn)/ui/input';
@@ -32,7 +31,7 @@ export default function SignupPage() {
 
       console.log('Signing up with', { name, email, password });
       setLoading(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       setLoading(false);
       if (error.response) {
         // Handle specific server-side error (like user already exists)

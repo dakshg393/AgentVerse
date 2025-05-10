@@ -9,7 +9,9 @@ import useLoadingStore from '@/store/loadingStore';
 import useUserStore from '@/store/userStore';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import {Button} from '@/components/(shadcn)/ui/button';
+import {Moon, Sun} from 'lucide-react';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
@@ -23,12 +25,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const router = useRouter();
   const pathname = usePathname();
 
+  const [mode,setMode] = useState("dark")
+
+  const toggleMode=()=>{
+    if(mode==="dark"){
+      setMode("")
+    }else{
+      setMode("dark")
+    }
+  }
+
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`${mode}`}>
       <head>
         <link rel="icon" href="/Logo.jpeg" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Button className='fixed bottom-5 left-5 w-10 h-10 rounded-full ' onClick={toggleMode}>{mode==="dark" ? <Sun/>:<Moon/>}</Button>
         <Toaster
           position="top-center"
           toastOptions={{
