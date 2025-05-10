@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/(shadcn)/ui/av
 import { useRef, useState } from 'react';
 import { Button } from '@/components/(shadcn)/ui/button';
 import { Plus, Volume2, VolumeOff, X } from 'lucide-react';
-import {faqs,whyUsData,agentsOverview, testimonials} from "@/utils/landingPage.utils.jsx";
+import {faqs,whyUsData,agentsOverview, testimonials} from "@/utils/landingPage.utils.tsx";
 import { Card,CardHeader,CardContent,CardTitle,CardDescription,CardFooter } from '@/components/(shadcn)/ui/card';
 import { Table,TableHeader,TableRow,TableHead,TableBody,TableCell } from '@/components/(shadcn)/ui/table';
 import {Plans} from '@/utils/subscription.utils';
