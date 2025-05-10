@@ -43,7 +43,7 @@ const faqs =[
       
   
   
-export const whyUsData = [
+ const whyUsData = [
     {
       feature: "Multi-Agent Support",
       agentverse: "✅ Yes – Domain-specific agents (Interview, Healthcare, Legal)",
