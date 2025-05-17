@@ -29,7 +29,7 @@ export const POST = async (request: NextRequest) => {
     response.cookies.set('accessToken', newAccessToken, {
       httpOnly: true,
       secure: true,
-      sameSite: 'Strict',
+      sameSite: 'strict',
       path: '/',
     });
 
@@ -37,7 +37,7 @@ export const POST = async (request: NextRequest) => {
     response.cookies.set('refreshToken', newRefreshToken, {
       httpOnly: true,
       secure: true,
-      sameSite: 'Strict',
+      sameSite: 'strict',
       path: '/',
     });
 

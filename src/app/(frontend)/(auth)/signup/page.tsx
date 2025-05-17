@@ -33,18 +33,13 @@ export default function SignupPage() {
       setLoading(false);
     } catch (error: unknown) {
       setLoading(false);
-      if (error.response) {
-        // Handle specific server-side error (like user already exists)
-        if (error.response.status === 409) {
-          toast.error(error.response.data.error || 'User already exists with this email');
-        } else {
-          // Handle other errors returned by the server
-          toast.error(error.response.data.error || 'Something went wrong.');
-        }
-      } else {
+
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || 'Something went wrong');
+      }else{
         // Handle network errors or other unexpected errors
         toast.error('Network error or server is down.');
-        console.log('Network error:', error.message);
+        console.log('Network error:');
       }
     }
   };
@@ -106,3 +101,4 @@ export default function SignupPage() {
     </div>
   );
 }
+

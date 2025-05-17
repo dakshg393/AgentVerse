@@ -374,7 +374,7 @@ export default function InterviewPage() {
 
     mediaRecorder.onstop = () => {
       const audioBlob = new Blob(chunks, { type: 'audio/webm' });
-    
+
       // Run async code outside of the event handler
       (async () => {
         const message = await transcribeAudio(audioBlob);
@@ -389,7 +389,7 @@ export default function InterviewPage() {
         }
       })();
     };
-    
+
     mediaRecorder.start(500);
     setIsRecording(true);
   };

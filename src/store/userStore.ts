@@ -12,8 +12,8 @@ interface User {
 interface UserStore {
   user: User | null;
   loadingUser: boolean;
-  setUser: () => Promise<void>;
-  getUser: () => Promise<void>;
+  setUser: (user: User) => Promise<void>;
+  getUser: () => Promise<User | null>; // <-- fix here
   loginUser: (credentials: { email: string; password: string }) => Promise<any>;
   logoutUser: () => Promise<any>;
 }
@@ -22,8 +22,8 @@ const useUserStore = create<UserStore>((set) => ({
   user: null,
   loadingUser: false,
 
-  setUser: async (data) => {
-    set({ user: data });
+  setUser: async (user:User) => {
+    set({ user: user });
   },
 
   getUser: async () => {
@@ -36,6 +36,7 @@ const useUserStore = create<UserStore>((set) => ({
     } catch (err) {
       console.log(`here this is error ${err}`);
       set({ user: null, loadingUser: false });
+      return null
     }
   },
 

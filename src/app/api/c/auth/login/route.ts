@@ -3,15 +3,17 @@ import { error } from 'console';
 import { NextRequest, NextResponse } from 'next/server';
 import User from '@/models/user.model.js';
 import { generateAccessAndRefreshToken } from '@/helpers/generateAccAndRefToken.helpers';
-import ms from 'ms';
+import ms from 'ms'; //ms is used to conver 1d into milisecond
+
 
 dbConnect();
 
 export const POST = async (request: NextRequest) => {
   try {
-    const accessTokenExpiry = ms(process.env.ACCESS_TOKEN_EXPIRY || '1d');
-    const refreshTokenExpiry = ms(process.env.REFRESH_TOKEN_EXPIRY || '7d');
-
+        const accessTokenExpiry:number = ms(process.env.ACCESS_TOKEN_EXPIRY || '1d') as number;
+        const refreshTokenExpiry:number = ms(process.env.REFRESH_TOKEN_EXPIRY || '7d') as number;
+        console.log("Access token expirey ",accessTokenExpiry)
+        console.log('Type of accessTokenExpiry:', typeof accessTokenExpiry);
     const reqBody = await request.json();
     const { email, password } = reqBody;
     console.log(1);
@@ -35,7 +37,7 @@ export const POST = async (request: NextRequest) => {
     const isPasswordCorrect = await user.isPasswordCorrect(password);
     console.log(5);
     if (!isPasswordCorrect) {
-      return NextResponse({ error: 'Password is Not Correct' }, { status: 400 });
+      return NextResponse.json({ error: 'Password is Not Correct' }, { status: 400 });
     }
     console.log(6);
     const { newRefreshToken, newAccessToken } = await generateAccessAndRefreshToken(user._id);
@@ -48,14 +50,14 @@ export const POST = async (request: NextRequest) => {
     console.log(9);
     response.cookies.set('refreshToken', newRefreshToken, {
       httpOnly: true,
-      sameSite: 'Strict',
+      sameSite: 'strict',
       path: '/',
       maxAge: accessTokenExpiry,
     });
 
     response.cookies.set('accessToken', newAccessToken, {
       httpOnly: true,
-      sameSite: 'Strict',
+      sameSite: 'strict',
       path: '/',
       maxAge: refreshTokenExpiry,
     });

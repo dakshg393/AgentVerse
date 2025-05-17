@@ -9,16 +9,13 @@ export async function GET(request: NextRequest) {
     // 1. Parse the URL to extract query params
     const url = new URL(request.url);
     const userId = url.searchParams.get('userId');
-    console.log(userId)
+    console.log(userId);
     if (!userId) {
-      return NextResponse.json(
-        { error: 'userId query parameter is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'userId query parameter is required' }, { status: 400 });
     }
 
     // 2. Fetch all sessions created by this user
-    const userSessions = await Session.find({ createdBy: userId }).sort({createdAt:-1}).lean();
+    const userSessions = await Session.find({ createdBy: userId }).sort({ createdAt: -1 }).lean();
 
     // 3. Return the sessions with a 200 status
     return NextResponse.json(

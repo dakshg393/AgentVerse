@@ -14,7 +14,16 @@ import {
 } from '@/components/(shadcn)/ui/table';
 import useUserStore from '@/store/userStore';
 import { transactions } from '@/utils/profile.utils';
+import { v4 as uuidv4 } from 'uuid';
 
+
+interface Transaction {
+  _id: string;
+  amount: number;
+  plantype: string; 
+  invoice: string;
+
+}
 export default function ProfilePage() {
   const user = useUserStore((state) => state.user);
   // console.log(user);
@@ -101,15 +110,15 @@ export default function ProfilePage() {
                   <TableHead>Invoice</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                {transactions.map((transaction) => (
-                  <TableRow>
-                    {Object.keys(transaction).map((key) => (
-                      <TableCell>${transaction[key]}</TableCell>
+              {/* <TableBody>
+                {transactions.map((transaction:undefined) => (
+                  <TableRow key={uuidv4()}>
+                    {Object.keys(transaction:Transaction).map((key) => (
+                      <TableCell key={uuidv4()}>${transaction[key]}</TableCell>
                     ))}
                   </TableRow>
                 ))}
-              </TableBody>
+              </TableBody> */}
             </Table>
           </div>
         </div>

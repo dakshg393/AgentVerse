@@ -28,6 +28,7 @@ import { useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
 import { useEffect, useState } from 'react';
 import useLoadingStore from '@/store/loadingStore';
+import {clear} from 'console';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
@@ -60,7 +61,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
         const fetchedUser = await getUser();
         console.log(fetchUser);
-        if (!fetchedUser) {
+        if(fetchedUser===null) {
           router.push('/login');
         } else {
           setUser(fetchedUser);
@@ -177,7 +178,10 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                         Billing
                       </span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="p-4 hover:text-[#ff007f] cursor-pointer " onClick={handleLogout}>
+                    <DropdownMenuItem
+                      className="p-4 hover:text-[#ff007f] cursor-pointer "
+                      onClick={handleLogout}
+                    >
                       <span className="flex items-center gap-2 hover:text-[#ff007f]">
                         <LogOut className="hover:text-[#ff007f]" />
                         Logout

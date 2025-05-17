@@ -23,16 +23,12 @@ export default function LoginPage() {
       const response = await axios.post('/api/c/auth/login', { email, password });
       toast.success(response.data.message || 'Login successful');
       router.push('/dashboard');
-    } catch (error:unknown) {
-      if (error.response) {
-        if (error.response.status === 401) {
-          toast.error('Invalid email or password');
-        } else {
-          toast.error(error.response.data.error || 'Login failed');
-        }
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || 'Something went wrong');
       } else {
         toast.error('Network error. Please try again.');
-        console.error('Login error:', error.message);
+        console.error('Login error');
       }
     } finally {
       setLoading(false);

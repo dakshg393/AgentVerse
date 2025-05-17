@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     await initializeMCP();
 
     const { message, chatHistory = [] } = await req.json();
-    console.log(message)
+    console.log(message);
     const updatedHistory = [
       ...chatHistory,
       {
