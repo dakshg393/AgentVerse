@@ -263,6 +263,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera, CameraOff, Mic, MicOff, PlayCircleIcon, StopCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import {useParams} from 'next/navigation';
 
 export default function InterviewPage() {
   const [settings, setSettings] = useState({
@@ -281,7 +282,8 @@ export default function InterviewPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const synthesisRef = useRef<SpeechSynthesis | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
-
+  const params= useParams()
+  const sessionId = params.id
   useEffect(() => {
     const getUserMedia = async () => {
       try {
@@ -378,8 +380,9 @@ export default function InterviewPage() {
       // Run async code outside of the event handler
       (async () => {
         const message = await transcribeAudio(audioBlob);
+        
         try {
-          const response = await axios.post('/api/c/chat', { message });
+          const response = await axios.post('/api/c/chat', { message,sessionId });
           if (response.data?.response) {
             speakText(response.data.response);
           }

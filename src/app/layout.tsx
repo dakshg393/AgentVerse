@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/Logo.jpeg" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Button className="fixed bottom-5 left-5 w-10 h-10 rounded-full " onClick={toggleMode}>
+        <Button className="fixed bottom-5 left-5 w-10 h-10  rounded-2xl " onClick={toggleMode}>
           {mode === 'dark' ? <Sun /> : <Moon />}
         </Button>
         <Toaster

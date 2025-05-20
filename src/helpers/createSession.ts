@@ -6,7 +6,7 @@ dbConnect();
 
 export const createSession = async (data) => {
   try {
-    const { title, createdBy, agentType, agentTypeRef, domainData } = data;
+    const { title, createdBy, agentType, agentTypeRef, domainData,prompt } = data;
 
     const sessionDetails = await Session.create({
       title,
@@ -14,6 +14,7 @@ export const createSession = async (data) => {
       agentType,
       agentTypeRef,
       domainData,
+      prompt,
     });
 
     return sessionDetails;

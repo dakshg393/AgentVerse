@@ -87,11 +87,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <main className="flex-1  overflow-auto   ">{children}</main>
 
       {/* Bottom Navigation (Fixed) */}
-      <nav className=" flex items-center justify-center fixed bottom-0 md:bottom-4 left-1/2 transform -translate-x-1/2 p-4  rounded-lg shadow-lg border-2  w-[95%] sm:w-auto backdrop-blur-3xl z-100">
+      <nav className=" flex items-center justify-center fixed bottom-0 md:bottom-4 left-1/2 transform -translate-x-1/2 p-4  rounded-lg shadow-lg border-2  w-full sm:w-auto backdrop-blur-3xl z-100">
         <NavigationMenu>
           <NavigationMenuList className="flex flex-wrap justify-center md:flex-nowrap gap-2 md:gap-4">
             {/* Profile Avatar */}
-            <NavigationMenuItem className="border-r-2 border-pink-600 hidden sm:flex  pr-4">
+            <NavigationMenuItem className="border-r-2 border-pink-600  sm:flex  pr-4">
               <Link href="/dashboard" legacyBehavior passHref className="bg-transparent">
                 <Avatar className="bg-transparent">
                   <AvatarImage className="bg-transparent" src="/logo.jpeg" />
@@ -152,7 +152,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               >
                 <DropdownMenu>
                   <DropdownMenuTrigger>
-                    <Settings size={50} className={`hover:text-[#ff007f]   hover:cursor-pointer`} />
+                    <Settings size={50} className={`hover:text-[#ff007f]   hover:cursor-pointer `} />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="z-110">
                     <DropdownMenuLabel>

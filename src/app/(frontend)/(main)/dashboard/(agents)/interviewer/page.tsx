@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import useUserStore from '@/store/userStore';
 import toast from 'react-hot-toast';
+import {generateInterviewPrompt} from '@/lib/client/generateInterviewPrompt';
 
 interface InterviewDetails {
   jobTitle: string;
@@ -38,7 +39,9 @@ export default function InterviewSession() {
 
   const onSubmit = async (data: InterviewDetails) => {
     try {
-      const response = await axios.post('/api/c/c/agents/interviewAgent', { data, user });
+      const prompt=generateInterviewPrompt(data)
+      console.log(prompt)
+      const response = await axios.post('/api/c/c/agents/interviewAgent', { data,user,prompt });
       toast.success(response.data.message);
       router.push(`/dashboard/sessions/session/${response?.data?.data?._id}`);
     } catch (error) {
@@ -51,7 +54,7 @@ export default function InterviewSession() {
   };
 
   return (
-    <section className="min-h-screen w-full flex items-center justify-center flex-col p-4">
+    <section className="min-h-screen w-full flex items-center justify-center flex-col p-4 pb-20">
       <h1 className="text-xl font-bold mb-4">Schedule Your Interview Now</h1>
 
       <div className="w-full h-full min-h-[80%] max-h-[90%] flex justify-center flex-col md:flex-row">

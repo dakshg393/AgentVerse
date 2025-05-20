@@ -13,6 +13,8 @@ export const POST = async (request: NextRequest) => {
     const { jobTitle, jobDiscription, avatar, resume, yearOfExperience, linkdinUrl, skills } =
       reqBody.data;
 
+    const {user,prompt} = reqBody
+    
     if ([jobTitle, jobDiscription, yearOfExperience, linkdinUrl, skills].some((value) => !value)) {
       return NextResponse.json({ error: 'Required fields are missing' }, { status: 400 });
     }
@@ -31,12 +33,16 @@ export const POST = async (request: NextRequest) => {
     // Create session
     const sessionDetails = await createSession({
       title: jobTitle,
-      createdBy: reqBody.user._id,
+      createdBy: user._id,
       agentType: 'Aiagent',
       agentTypeRef: 'Interview',
       domainData: interviewDetails._id,
+      prompt:prompt,
     });
 
+    
+
+    console.log(`Here is session details ${prompt}`)
     return NextResponse.json(
       {
         message: 'Interview session created successfully',

@@ -3,19 +3,26 @@ import { NextResponse } from 'next/server';
 import { Client } from '@modelcontextprotocol/sdk/client';
 import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse';
 import { GoogleGenAI } from '@google/genai';
+//import redis from '@/lib/redis';
+import redis from '@/lib/server/redis';
+
 
 let mcpClient: Client;
 let aiInstance: GoogleGenAI;
 let tools: any[] = [];
 
-async function initializeMCP() {
+async function initializeMCP(sessionId) {
   if (!mcpClient) {
     mcpClient = new Client({
       name: 'example-client',
       version: '1.0.0',
     });
 
-    await mcpClient.connect(new SSEClientTransport(new URL(process.env.MCP_SERVER_URL)));
+    const url = new URL(process.env.MCP_SERVER_URL!)   //! This marks assure typescript that value of mcp serverurl is not null
+    url.searchParams.set('sessionId',sessionId)
+
+    await mcpClient.connect(new SSEClientTransport(url));
+    //await mcpClient.connect(new SSEClientTransport(new URL(process.env.MCP_SERVER_URL)));
 
     const toolsResponse = await mcpClient.listTools();
     tools = toolsResponse.tools.map((tool) => ({
@@ -42,9 +49,18 @@ async function initializeMCP() {
 
 export async function POST(req: Request) {
   try {
-    await initializeMCP();
+    
+    // await initializeMCP();
 
-    const { message, chatHistory = [] } = await req.json();
+    const { message ,sessionId } = await req.json();
+
+
+    await initializeMCP(sessionId);
+
+    const historyKey = `chat:${sessionId}`;
+    const historyJSON = await redis.get(historyKey);
+    let chatHistory = historyJSON ? JSON.parse(historyJSON) : [];
+    console.dir(chatHistory, { depth: null });
     console.log(message);
     const updatedHistory = [
       ...chatHistory,
@@ -60,7 +76,19 @@ export async function POST(req: Request) {
     do {
       const response = await aiInstance.models.generateContent({
         model: 'gemini-2.0-flash',
-        contents: currentHistory,
+        contents: [
+           {
+      role: 'model',
+      parts: [
+        {
+          text: `You are InterviewGPT, a professional AI interview assistant created by AgentVerse.
+You conduct mock technical interviews for software developers applying to companies like Amazon, Google, and startups.
+When asked who you are, say: "I'm InterviewGPT, your personal AI interviewer built to help you practice and improve your technical interview skills."
+Never mention you're a large language model.`,
+          type: 'text',
+        },
+      ],
+    }, ...currentHistory.slice(6)],
         config: {
           tools: [
             {
@@ -102,6 +130,8 @@ export async function POST(req: Request) {
         });
       }
     } while (functionCall);
+
+    await redis.set(historyKey, JSON.stringify(currentHistory), 'EX', 1800);
 
     return NextResponse.json({
       response: currentHistory.at(-1).parts[0].text,
