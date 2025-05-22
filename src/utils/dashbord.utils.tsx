@@ -4,7 +4,7 @@ const aiServices = [
   {
     title: 'Interview Pro',
     icon: Mic,
-    href: '/dashboard/interviewer',
+    href: '/u/dashboard/interviewer',
     color: 'linear-gradient(to right, #4F46E5, #7C3AED)',
     tagline: 'Nail your dream job with mock interviews & feedback',
   },

@@ -162,7 +162,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       className="p-4 border-b-2  cursor-pointer"
-                      onClick={() => router.push('/dashboard/profile')}
+                      onClick={() => router.push('/u/dashboard/profile')}
                     >
                       <span className="flex items-center gap-2 hover:text-[#ff007f]">
                         <User className="hover:text-[#ff007f]" />
@@ -171,7 +171,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       className="p-4 border-b-2  cursor-pointer"
-                      onClick={() => router.push('/dashboard/profile/#subscription')}
+                      onClick={() => router.push('/u/dashboard/profile/#subscription')}
                     >
                       <span className="flex items-center gap-2 hover:text-[#ff007f]">
                         <CreditCard className="hover:text-[#ff007f]" />

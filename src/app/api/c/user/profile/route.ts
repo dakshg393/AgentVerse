@@ -227,3 +227,23 @@ export async function GET(request: NextRequest) {
     return response;
   }
 }
+
+
+// export async function POST(request:NextRequest) {
+//   const {fullName,_id}= await request.json()
+//   try {
+//     if (!fullName &&) {
+//        return NextResponse.json({error:"Value not found"},{status:404})
+//     }
+
+//    const updatedUser = await User.findByIdAndUpdate(
+//   _id,                
+//   { fullName },       
+//   { new: true }     
+//   );
+
+//   return NextResponse.json({message:"User Updated Successfully ",data:updatedUser},{status:404})
+//   } catch (error) {
+//     return NextResponse.json({error:"Somthing Went Wrong"},{status:404})
+//   }
+// }

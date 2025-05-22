@@ -27,7 +27,7 @@ export default function SignupPage() {
       const response = await axios.post('/api/users/signup', user);
       console.log(JSON.stringify(response));
       toast.success(`${response.data.message || 'User  Signup '}`);
-      router.push('/login');
+      router.push('/u/login');
 
       console.log('Signing up with', { name, email, password });
       setLoading(false);
@@ -92,7 +92,7 @@ export default function SignupPage() {
           </form>
           <p className="text-center text-sm mt-4">
             Already have an account?{' '}
-            <Link href="/login" className="text-blue-600 hover:underline">
+            <Link href="/u/login" className="text-blue-600 hover:underline">
               Login
             </Link>
           </p>

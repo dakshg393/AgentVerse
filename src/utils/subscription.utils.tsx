@@ -30,23 +30,23 @@ const Plans = [
       'Portfolio site hosting (with custom domain)',
     ],
   },
-  {
-    name: 'Premium',
-    planName: 'Premium',
-    price: '$19.99/month',
-    description: 'For serious candidates aiming for top tech companies and full support.',
-    features: [
-      'Everything in Pro',
-      'Live 1:1 mock interview sessions (3/month)',
-      'Unlimited AI interaction',
-      'AI resume & cover letter builder',
-      'Personal career coach support',
-      'Role-specific mock tests (FAANG, startups, etc.)',
-      'Real-time chat support',
-      'Access to exclusive job/internship board',
-      'Portfolio review by professionals',
-    ],
-  },
+  // {
+  //   name: 'Premium',
+  //   planName: 'Premium',
+  //   price: '$19.99/month',
+  //   description: 'For serious candidates aiming for top tech companies and full support.',
+  //   features: [
+  //     'Everything in Pro',
+  //     'Live 1:1 mock interview sessions (3/month)',
+  //     'Unlimited AI interaction',
+  //     'AI resume & cover letter builder',
+  //     'Personal career coach support',
+  //     'Role-specific mock tests (FAANG, startups, etc.)',
+  //     'Real-time chat support',
+  //     'Access to exclusive job/internship board',
+  //     'Portfolio review by professionals',
+  //   ],
+  // },
 ];
 
 export { Plans };

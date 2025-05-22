@@ -263,7 +263,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera, CameraOff, Mic, MicOff, PlayCircleIcon, StopCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import {useParams} from 'next/navigation';
+import {useParams, useRouter} from 'next/navigation';
+import useUserStore from '@/store/userStore';
 
 export default function InterviewPage() {
   const [settings, setSettings] = useState({
@@ -284,6 +285,29 @@ export default function InterviewPage() {
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const params= useParams()
   const sessionId = params.id
+  const userId = useUserStore((state)=>state.user?._id)
+  const router= useRouter()
+  const [sessionDetails,setSessionDetails] = useState({})
+  const [prompt,setPrompt] = useState("")
+useEffect(() => {
+  const getSessionDetails = async () => {
+    try {
+      const sessionData = await axios.get(`/api/c/user/session/${sessionId}/${userId}`);
+      console.log(sessionData.data.data);
+      setPrompt(sessionData.data.data.prompt || "")
+      setSessionDetails(sessionData.data.data)
+    } catch (error) {
+      toast.error('Session not found');
+      router.push('/u/dashboard/sessions')
+    }
+  };
+
+  getSessionDetails();
+}, [sessionId, userId]); 
+
+
+
+
   useEffect(() => {
     const getUserMedia = async () => {
       try {
@@ -382,7 +406,7 @@ export default function InterviewPage() {
         const message = await transcribeAudio(audioBlob);
         
         try {
-          const response = await axios.post('/api/c/chat', { message,sessionId });
+          const response = await axios.post('/api/c/chat', { message,sessionId ,prompt});
           if (response.data?.response) {
             speakText(response.data.response);
           }

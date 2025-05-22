@@ -30,6 +30,7 @@ import {
   TableCell,
 } from '@/components/(shadcn)/ui/table';
 import { Plans } from '@/utils/subscription.utils';
+import Footer from '@/components/Footer';
 
 export default function LandingPage() {
   const videoRef = useRef(null);
@@ -74,7 +75,7 @@ export default function LandingPage() {
         <NavigationMenu>
           <NavigationMenuList className="flex items-center gap-4">
             <NavigationMenuItem>
-              <Link href="/login" passHref legacyBehavior>
+              <Link href="/u/login" passHref legacyBehavior>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} bg-transparent font-bold text-md hover:bg-transparent hover:text-pink-400 hover:underline decoration-2 underline-offset-8`}
                 >
@@ -84,7 +85,7 @@ export default function LandingPage() {
             </NavigationMenuItem>
 
             <NavigationMenuItem className="hover:shadow-pink-400/50">
-              <Link href="/signup" passHref legacyBehavior>
+              <Link href="/u/signup" passHref legacyBehavior>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} bg-pink-400 hover:bg-pink-400 hover:shadow-md hover:shadow-pink-400/50 transition`}
                 >
@@ -334,7 +335,7 @@ export default function LandingPage() {
   </div>
 </footer> */}
       </section>
-      <footer className=" bottom-0 w-full h-80 py-4 px-4 text-center bg-gradient-to-b  to-pink-500 flex flex-col items-center justify-center backdrop-blur-4xl border-t dark:border-white rounded-t-3xl">
+      {/* <footer className=" bottom-0 w-full h-80 py-4 px-4 text-center bg-gradient-to-b  to-pink-500 flex flex-col items-center justify-center backdrop-blur-4xl border-t dark:border-white rounded-t-3xl">
         <div className="flex flex-col items-center justify-center gap-4 w-full">
           <div className="flex flex-wrap items-center justify-center gap-8 text-sm sm:text-base text-gray-700 ">
             <p className="hover:text-white hover:cursor-pointer">Contact Us</p>
@@ -346,7 +347,8 @@ export default function LandingPage() {
             AgentVerse
           </h1>
         </div>
-      </footer>
+      </footer> */}
+      <Footer/>
     </div>
   );
 }

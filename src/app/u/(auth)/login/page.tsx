@@ -22,7 +22,7 @@ export default function LoginPage() {
       setLoading(true);
       const response = await axios.post('/api/c/auth/login', { email, password });
       toast.success(response.data.message || 'Login successful');
-      router.push('/dashboard');
+      router.push('/u/dashboard');
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message || 'Something went wrong');
@@ -72,7 +72,7 @@ export default function LoginPage() {
           </form>
           <p className="text-center text-sm mt-4">
             Don&apos;t have an account?{' '}
-            <Link href="/signup" className="text-blue-600 hover:underline">
+            <Link href="/u/signup" className="text-blue-600 hover:underline">
               Sign up
             </Link>
           </p>

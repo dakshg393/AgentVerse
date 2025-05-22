@@ -39,9 +39,9 @@ export default function SessionPage() {
 
   const handleSessionNavigation = (status:string,sessionId:string)=>{
       if(status==='Start'){
-        router.push(`/dashboard/sessions/session/${sessionId}`)
+        router.push(`/u/dashboard/sessions/session/${sessionId}`)
       }else{
-        router.push(`/dashboard/some/session/${sessionId}`)
+        router.push(`/u/dashboard/some/session/${sessionId}`)
       }
   }
 

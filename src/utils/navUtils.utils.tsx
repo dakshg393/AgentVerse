@@ -2,9 +2,9 @@
 import { Users, History, CreditCard, BarChart2, Settings, LayoutGrid } from 'lucide-react';
 
 const navItems = [
-  { title: 'Dashboard', href: '/dashboard', icon: LayoutGrid, color: 'blue' },
-  { title: 'Sessions', href: '/dashboard/sessions', icon: History, color: 'blue' },
-  { title: 'Subscription', href: '/dashboard/subscription', icon: CreditCard, color: 'blue' },
+  { title: 'Dashboard', href: '/u/dashboard', icon: LayoutGrid, color: 'blue' },
+  { title: 'Sessions', href: '/u/dashboard/sessions', icon: History, color: 'blue' },
+  { title: 'Subscription', href: '/u/dashboard/subscription', icon: CreditCard, color: 'blue' },
 ];
 
 export { navItems };

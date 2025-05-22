@@ -43,7 +43,7 @@ export default function InterviewSession() {
       console.log(prompt)
       const response = await axios.post('/api/c/c/agents/interviewAgent', { data,user,prompt });
       toast.success(response.data.message);
-      router.push(`/dashboard/sessions/session/${response?.data?.data?._id}`);
+      router.push(`/u/dashboard/sessions/session/${response?.data?.data?._id}`);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message || 'Submission failed.');

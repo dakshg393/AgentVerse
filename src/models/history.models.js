@@ -10,15 +10,8 @@ const historySchema = new Schema(
     owner: {
       type: 'String',
     },
-    message: {
-      type: String,
-    },
-    media: {
-      type: [String],
-    },
-    snippit: {
-      type: String,
-    },
+    History: []
+    
   },
   { timestamps: true }
 );

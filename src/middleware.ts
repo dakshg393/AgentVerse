@@ -43,18 +43,18 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const isPublicPath = ['/login', '/signup', '/'].includes(path);
+  const isPublicPath = ['/u/login', '/u/signup', '/'].includes(path);
   const accessToken = request.cookies.get('accessToken')?.value;
   const refreshToken = request.cookies.get('refreshToken')?.value;
 
   // Prevent infinite redirects
   if (accessToken || refreshToken) {
     if (isPublicPath) {
-      return NextResponse.redirect(new URL('/dashboard', request.url));
+      return NextResponse.redirect(new URL('/u/dashboard', request.url));
     }
   } else {
     if (!isPublicPath) {
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL('/u/login', request.url));
     }
   }
 
@@ -62,5 +62,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login', '/signup', '/', '/api/c/user/:path*'],
+  matcher: ['/dashboard/:path*', '/u/login', '/u/signup', '/', '/api/c/user/:path*'],
 };

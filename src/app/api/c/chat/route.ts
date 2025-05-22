@@ -52,8 +52,8 @@ export async function POST(req: Request) {
     
     // await initializeMCP();
 
-    const { message ,sessionId } = await req.json();
-
+    const { message ,sessionId,prompt } = await req.json();
+    console.log(`Here are json details ${message} session id ${sessionId} ${prompt}`)
 
     await initializeMCP(sessionId);
 
