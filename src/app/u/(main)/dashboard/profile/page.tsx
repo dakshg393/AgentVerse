@@ -31,7 +31,7 @@ export default function ProfilePage() {
   return (
     <section className="flex items-center  flex-col min-h-screen mb-16 mt-10">
       <span className="flex flex-col items-start justify-start w-[80%]">
-        <h1 className="">Hi {user?.fullName}</h1>
+        <h1 className="text-3xl font-semibold">Hello  {user?.fullName}</h1>
         <h1 className="">{user?.email}</h1>
       </span>
       <div
@@ -43,7 +43,7 @@ export default function ProfilePage() {
           className="flex flex-row justify-between w-full border-b-2 rounded-2xl p-2"
         >
           <h1>Profile</h1>
-          <Button>Edit profile</Button>
+          {/* <Button>Edit profile</Button> */}
         </div>
         <div className="flex flex-col justify-center  w-[90%] ">
           <h1>Profile Details</h1>
@@ -74,8 +74,8 @@ export default function ProfilePage() {
             <h1>Current Subscription</h1>
             <span className="flex items-center justify-between">
               <span>
-                <h1>Premiumm Plan </h1>
-                <h2>End of Plan {'12/12/25'}</h2>
+                <h1>{user?.subscription || "Free"}</h1>
+                <h2>End of Plan -</h2>
               </span>
               <Button>Upgrade Plan</Button>
             </span>
@@ -87,8 +87,8 @@ export default function ProfilePage() {
             <h1 className=" ">Usage</h1>
             <span className="p-2">
               <h1>Usage Limit </h1>
-              <h2>Your Usage Limit is full </h2>
-              <Progress value={33} className="w-[80%] m-2 " />
+              <h2>Your Usage Limit is Free </h2>
+              <Progress value={100} className="w-[80%] m-2 " />
             </span>
           </div>
 

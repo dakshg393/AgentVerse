@@ -41,7 +41,7 @@ export default function SessionPage() {
       if(status==='Start'){
         router.push(`/u/dashboard/sessions/session/${sessionId}`)
       }else{
-        router.push(`/u/dashboard/some/session/${sessionId}`)
+        router.push(`/u/dashboard/sessions/summery/${sessionId}`)
       }
   }
 

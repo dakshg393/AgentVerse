@@ -2,7 +2,7 @@ const Plans = [
   {
     name: 'Basic',
     planName: 'Basic',
-    price: 'Free',
+    price: 'free',
     description: 'Perfect for beginners getting started with interview preparation.',
     features: [
       'Access to 5 daily interview questions',
@@ -14,22 +14,22 @@ const Plans = [
       '1 project upload or portfolio review',
     ],
   },
-  {
-    name: 'Pro',
-    planName: 'Pro',
-    price: '$9.99/month',
-    description: 'For consistent learners who want more control and deeper insights.',
-    features: [
-      'Unlimited daily interview questions',
-      'Resume builder with export options',
-      'Access to pro mock interviews (recorded)',
-      'Priority email support',
-      'Detailed performance analytics',
-      'AI Interview Coach (50 responses/day)',
-      'Custom interview question sets',
-      'Portfolio site hosting (with custom domain)',
-    ],
-  },
+  // {
+  //   name: 'Pro',
+  //   planName: 'Pro',
+  //   price: '$9.99/month',
+  //   description: 'For consistent learners who want more control and deeper insights.',
+  //   features: [
+  //     'Unlimited daily interview questions',
+  //     'Resume builder with export options',
+  //     'Access to pro mock interviews (recorded)',
+  //     'Priority email support',
+  //     'Detailed performance analytics',
+  //     'AI Interview Coach (50 responses/day)',
+  //     'Custom interview question sets',
+  //     'Portfolio site hosting (with custom domain)',
+  //   ],
+  // },
   // {
   //   name: 'Premium',
   //   planName: 'Premium',

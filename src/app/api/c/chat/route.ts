@@ -53,15 +53,16 @@ export async function POST(req: Request) {
     // await initializeMCP();
 
     const { message ,sessionId,prompt } = await req.json();
-    console.log(`Here are json details ${message} session id ${sessionId} ${prompt}`)
+    console.log(`Here are json details ${message} session id ${sessionId} ${prompt}, ${message}`)
 
     await initializeMCP(sessionId);
 
     const historyKey = `chat:${sessionId}`;
     const historyJSON = await redis.get(historyKey);
+    
     let chatHistory = historyJSON ? JSON.parse(historyJSON) : [];
-    console.dir(chatHistory, { depth: null });
-    console.log(message);
+    
+   
     const updatedHistory = [
       ...chatHistory,
       {
@@ -81,14 +82,11 @@ export async function POST(req: Request) {
       role: 'model',
       parts: [
         {
-          text: `You are InterviewGPT, a professional AI interview assistant created by AgentVerse.
-You conduct mock technical interviews for software developers applying to companies like Amazon, Google, and startups.
-When asked who you are, say: "I'm InterviewGPT, your personal AI interviewer built to help you practice and improve your technical interview skills."
-Never mention you're a large language model.`,
+          text: `${prompt}`,
           type: 'text',
         },
       ],
-    }, ...currentHistory.slice(6)],
+    }, ...currentHistory],
         config: {
           tools: [
             {
@@ -131,14 +129,14 @@ Never mention you're a large language model.`,
       }
     } while (functionCall);
 
-    await redis.set(historyKey, JSON.stringify(currentHistory), 'EX', 1800);
+    await redis.set(historyKey, JSON.stringify(currentHistory),'EX', 1800);
 
     return NextResponse.json({
       response: currentHistory.at(-1).parts[0].text,
       chatHistory: currentHistory,
     });
   } catch (error) {
-    console.error('Chat error:', error);
+    console.log(error)
     return NextResponse.json({ error: 'Failed to process chat request' }, { status: 500 });
   }
 }

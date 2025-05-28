@@ -27,6 +27,9 @@ const userSchema = new Schema(
     refreshToken: {
       type: String,
     },
+    subscription: {
+      type: String,
+    }
   },
   { timestamps: true }
 );

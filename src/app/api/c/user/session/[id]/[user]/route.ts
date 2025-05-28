@@ -15,7 +15,7 @@ type Params = {
 dbConnect();
 export async function GET(req: Request, context: RouteContext) {
   const { id, user } =await context.params;
-  console.log(`user session id is ${id} , ${user}`)
+
   try {
     
 

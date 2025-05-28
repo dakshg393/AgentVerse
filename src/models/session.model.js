@@ -32,6 +32,9 @@ const sessionSchema = new Schema(
     prompt:{
       type:String,
     },
+    summery:{
+      type:String
+    },
     
   },
   { timestamps: true }

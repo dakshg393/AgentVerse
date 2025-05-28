@@ -289,10 +289,15 @@ export default function InterviewPage() {
   const router= useRouter()
   const [sessionDetails,setSessionDetails] = useState({})
   const [prompt,setPrompt] = useState("")
+  
 useEffect(() => {
   const getSessionDetails = async () => {
     try {
       const sessionData = await axios.get(`/api/c/user/session/${sessionId}/${userId}`);
+      if(sessionData.data.data?.summery || sessionData.data.data?.summery == ""){
+        toast.error("Session alredy Overed")
+        router.push(`/u/dashboard/sessions/summery/${sessionId}`)
+      }
       console.log(sessionData.data.data);
       setPrompt(sessionData.data.data.prompt || "")
       setSessionDetails(sessionData.data.data)
@@ -306,7 +311,9 @@ useEffect(() => {
 }, [sessionId, userId]); 
 
 
-
+const endSession=()=>{
+  router.push(`/u/dashboard/sessions/summery/${sessionId}`)
+}
 
   useEffect(() => {
     const getUserMedia = async () => {
@@ -579,6 +586,9 @@ useEffect(() => {
                 variant={isSpeaking ? 'destructive' : 'default'}
               >
                 {isSpeaking ? <StopCircle /> : isRecording ? <StopCircle /> : <PlayCircleIcon />}
+              </Button>
+              <Button onClick={endSession} className='bg-red-500'>
+                  End Session
               </Button>
             </CardFooter>
           </Card>

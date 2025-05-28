@@ -92,7 +92,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           <NavigationMenuList className="flex flex-wrap justify-center md:flex-nowrap gap-2 md:gap-4">
             {/* Profile Avatar */}
             <NavigationMenuItem className="border-r-2 border-pink-600  sm:flex  pr-4">
-              <Link href="/dashboard" legacyBehavior passHref className="bg-transparent">
+              <Link href="/u/dashboard" legacyBehavior passHref className="bg-transparent">
                 <Avatar className="bg-transparent">
                   <AvatarImage className="bg-transparent" src="/logo.jpeg" />
                   <AvatarFallback className="bg-transparent">AV</AvatarFallback>
