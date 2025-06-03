@@ -6,7 +6,6 @@ import { GoogleGenAI } from '@google/genai';
 //import redis from '@/lib/redis';
 import redis from '@/lib/server/redis';
 
-
 let mcpClient: Client;
 let aiInstance: GoogleGenAI;
 let tools: any[] = [];
@@ -18,8 +17,8 @@ async function initializeMCP(sessionId) {
       version: '1.0.0',
     });
 
-    const url = new URL(process.env.MCP_SERVER_URL!)   //! This marks assure typescript that value of mcp serverurl is not null
-    url.searchParams.set('sessionId',sessionId)
+    const url = new URL(process.env.MCP_SERVER_URL!); //! This marks assure typescript that value of mcp serverurl is not null
+    url.searchParams.set('sessionId', sessionId);
 
     await mcpClient.connect(new SSEClientTransport(url));
     //await mcpClient.connect(new SSEClientTransport(new URL(process.env.MCP_SERVER_URL)));
@@ -49,20 +48,18 @@ async function initializeMCP(sessionId) {
 
 export async function POST(req: Request) {
   try {
-    
     // await initializeMCP();
 
-    const { message ,sessionId,prompt } = await req.json();
-    console.log(`Here are json details ${message} session id ${sessionId} ${prompt}, ${message}`)
+    const { message, sessionId, prompt } = await req.json();
+    console.log(`Here are json details ${message} session id ${sessionId} ${prompt}, ${message}`);
 
     await initializeMCP(sessionId);
 
     const historyKey = `chat:${sessionId}`;
     const historyJSON = await redis.get(historyKey);
-    
+
     let chatHistory = historyJSON ? JSON.parse(historyJSON) : [];
-    
-   
+
     const updatedHistory = [
       ...chatHistory,
       {
@@ -78,15 +75,17 @@ export async function POST(req: Request) {
       const response = await aiInstance.models.generateContent({
         model: 'gemini-2.0-flash',
         contents: [
-           {
-      role: 'model',
-      parts: [
-        {
-          text: `${prompt}`,
-          type: 'text',
-        },
-      ],
-    }, ...currentHistory],
+          {
+            role: 'model',
+            parts: [
+              {
+                text: `${prompt}`,
+                type: 'text',
+              },
+            ],
+          },
+          ...currentHistory,
+        ],
         config: {
           tools: [
             {
@@ -129,14 +128,14 @@ export async function POST(req: Request) {
       }
     } while (functionCall);
 
-    await redis.set(historyKey, JSON.stringify(currentHistory),'EX', 1800);
+    await redis.set(historyKey, JSON.stringify(currentHistory), 'EX', 1800);
 
     return NextResponse.json({
       response: currentHistory.at(-1).parts[0].text,
       chatHistory: currentHistory,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return NextResponse.json({ error: 'Failed to process chat request' }, { status: 500 });
   }
 }

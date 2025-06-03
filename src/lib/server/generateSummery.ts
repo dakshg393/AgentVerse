@@ -1,14 +1,13 @@
 import { GoogleGenAI } from '@google/genai';
 import { NextResponse } from 'next/server';
 
-export async function generateSummary(history=[] as Array, role = "Software Developer") {
+export async function generateSummary(history = [] as Array, role = 'Software Developer') {
   try {
-    let aiInstance:GoogleGenAI;
+    let aiInstance: GoogleGenAI;
 
     aiInstance = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    
-   
-        const prompt = `
+
+    const prompt = `
 You are an AI interview analyzer. Given the following interview histroy  for the role of "${role}", generate a structured summary in this exact format:
 
 ---
@@ -45,35 +44,30 @@ You are an AI interview analyzer. Given the following interview histroy  for the
 - [Point 5]`;
 
     const response = await aiInstance.models.generateContent({
-        model: 'gemini-2.0-flash',
-        contents: [
-           {
-      role: 'model',
-      parts: [
+      model: 'gemini-2.0-flash',
+      contents: [
         {
-          text: `${prompt}`,
-          type: 'text',
+          role: 'model',
+          parts: [
+            {
+              text: `${prompt}`,
+              type: 'text',
+            },
+          ],
         },
+        [...history],
       ],
-    }, [...history]],
-        
-      });
-
-
-
+    });
 
     // const transcript = history
     //   .map(h => `${h.role === 'user' ? 'Interviewer' : 'Candidate'}: ${h.parts.map(p => p.text).join(' ')}`)
     //   .join('\n');
 
+    const candidate = response.candidates[0].content;
+    const part = candidate.parts[0];
+    const responseText = part.text;
 
-
-     const candidate = response.candidates[0].content;
-      const part = candidate.parts[0];
-      const responseText = part.text;
-      
     return responseText;
-
   } catch (error) {
     console.error('Summary generation error:', error);
     return NextResponse.json({ error: 'Failed to generate summary' }, { status: 500 });

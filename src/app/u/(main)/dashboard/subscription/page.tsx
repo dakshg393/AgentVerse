@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Button } from '@/components/(shadcn)/ui/button';
 import {
@@ -17,14 +17,14 @@ import toast from 'react-hot-toast';
 export default function SubscriptionPage() {
   const user = useUserStore((state) => state.user);
   const userId = user?._id;
-  const type = "free";
+  const type = 'free';
 
   const handleSubscribe = async () => {
     try {
-      const res = await axios.post("/api/c/user/subscription", { userId, type });
+      const res = await axios.post('/api/c/user/subscription', { userId, type });
 
       if (res.status === 200) {
-        toast.success("Subscribed successfully!");
+        toast.success('Subscribed successfully!');
         // Optional: Update local user store state or reload
         window.location.reload();
       }
@@ -54,12 +54,12 @@ export default function SubscriptionPage() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button 
-                className="w-full disabled:opacity-50 disabled:cursor-not-allowed" 
-                onClick={handleSubscribe} 
+              <Button
+                className="w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handleSubscribe}
                 disabled={!!user?.subscription}
               >
-                {user?.subscription ? "Already Subscribed" : "Subscribe Now"}
+                {user?.subscription ? 'Already Subscribed' : 'Subscribe Now'}
               </Button>
             </CardFooter>
           </Card>

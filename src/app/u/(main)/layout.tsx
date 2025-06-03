@@ -28,7 +28,7 @@ import { useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
 import { useEffect, useState } from 'react';
 import useLoadingStore from '@/store/loadingStore';
-import {clear} from 'console';
+import { clear } from 'console';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
@@ -61,7 +61,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
         const fetchedUser = await getUser();
         console.log(fetchUser);
-        if(fetchedUser===null) {
+        if (fetchedUser === null) {
           router.push('/login');
         } else {
           setUser(fetchedUser);
@@ -152,7 +152,10 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               >
                 <DropdownMenu>
                   <DropdownMenuTrigger>
-                    <Settings size={50} className={`hover:text-[#ff007f]   hover:cursor-pointer `} />
+                    <Settings
+                      size={50}
+                      className={`hover:text-[#ff007f]   hover:cursor-pointer `}
+                    />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="z-110">
                     <DropdownMenuLabel>

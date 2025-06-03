@@ -1,4 +1,3 @@
-
 'use client';
 import { Button } from '@/components/(shadcn)/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/(shadcn)/ui/card';
@@ -6,40 +5,36 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera, CameraOff, Mic, MicOff, PlayCircleIcon, StopCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import {useParams, useRouter} from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
 
 export default function SummeryPage() {
-
-    const [sessionSummery,setSessionSummery] = useState("")
-    const params= useParams()
-    const sessionId = params.id
-    const userId= useUserStore((state)=>state.user?._id)
+  const [sessionSummery, setSessionSummery] = useState('');
+  const params = useParams();
+  const sessionId = params.id;
+  const userId = useUserStore((state) => state.user?._id);
 
   useEffect(() => {
-  const getSessionSummery = async () => {
-    
-    try {
-      const summery = await axios.get(`/api/c/user/summery/${sessionId}/${userId}`);
-      console.log(summery.data.data);
-      setSessionSummery(summery.data.data)
-      
-    } catch (error) {
-      // console.log(error)
-      // toast.error(`Somthing Went Wrong Cant genrate the summmery`);
-      // router.push('/u/dashboard/sessions')
-    }
-  };
+    const getSessionSummery = async () => {
+      try {
+        const summery = await axios.get(`/api/c/user/summery/${sessionId}/${userId}`);
+        console.log(summery.data.data);
+        setSessionSummery(summery.data.data);
+      } catch (error) {
+        // console.log(error)
+        // toast.error(`Somthing Went Wrong Cant genrate the summmery`);
+        // router.push('/u/dashboard/sessions')
+      }
+    };
 
-  getSessionSummery();
-}, [sessionId, userId]); 
-
+    getSessionSummery();
+  }, [sessionId, userId]);
 
   return (
-    <section className='min-h-screen w-full flex items-center justify-start  flex-col pb-24'>
-    <h1 className='text-4xl font-bold p-6'>Summery</h1>
-        <div className='w-[80%]'>
-    {/* <p>
+    <section className="min-h-screen w-full flex items-center justify-start  flex-col pb-24">
+      <h1 className="text-4xl font-bold p-6">Summery</h1>
+      <div className="w-[80%]">
+        {/* <p>
   ### 📝 Interview Summary – React Developer<br /><br />
   Candidate: Daksh Gupta<br />
   Position: React Developer<br />
@@ -62,9 +57,8 @@ export default function SummeryPage() {
   Recommendation: Proceed to the next round / Strong hire<br />
   Suggestions for Growth: Continue exploring performance profiling in React and improve familiarity with accessibility best practices.
 </p> */}
-<p>{sessionSummery}</p>
-
-        </div>
+        <p>{sessionSummery}</p>
+      </div>
     </section>
   );
 }

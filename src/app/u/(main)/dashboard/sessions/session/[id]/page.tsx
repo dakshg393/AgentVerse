@@ -263,7 +263,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera, CameraOff, Mic, MicOff, PlayCircleIcon, StopCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import {useParams, useRouter} from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
 
 export default function InterviewPage() {
@@ -283,37 +283,36 @@ export default function InterviewPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const synthesisRef = useRef<SpeechSynthesis | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
-  const params= useParams()
-  const sessionId = params.id
-  const userId = useUserStore((state)=>state.user?._id)
-  const router= useRouter()
-  const [sessionDetails,setSessionDetails] = useState({})
-  const [prompt,setPrompt] = useState("")
-  
-useEffect(() => {
-  const getSessionDetails = async () => {
-    try {
-      const sessionData = await axios.get(`/api/c/user/session/${sessionId}/${userId}`);
-      if(sessionData.data.data?.summery || sessionData.data.data?.summery == ""){
-        toast.error("Session alredy Overed")
-        router.push(`/u/dashboard/sessions/summery/${sessionId}`)
+  const params = useParams();
+  const sessionId = params.id;
+  const userId = useUserStore((state) => state.user?._id);
+  const router = useRouter();
+  const [sessionDetails, setSessionDetails] = useState({});
+  const [prompt, setPrompt] = useState('');
+
+  useEffect(() => {
+    const getSessionDetails = async () => {
+      try {
+        const sessionData = await axios.get(`/api/c/user/session/${sessionId}/${userId}`);
+        if (sessionData.data.data?.summery || sessionData.data.data?.summery == '') {
+          toast.error('Session alredy Overed');
+          router.push(`/u/dashboard/sessions/summery/${sessionId}`);
+        }
+        console.log(sessionData.data.data);
+        setPrompt(sessionData.data.data.prompt || '');
+        setSessionDetails(sessionData.data.data);
+      } catch (error) {
+        toast.error('Session not found');
+        router.push('/u/dashboard/sessions');
       }
-      console.log(sessionData.data.data);
-      setPrompt(sessionData.data.data.prompt || "")
-      setSessionDetails(sessionData.data.data)
-    } catch (error) {
-      toast.error('Session not found');
-      router.push('/u/dashboard/sessions')
-    }
+    };
+
+    getSessionDetails();
+  }, [sessionId, userId]);
+
+  const endSession = () => {
+    router.push(`/u/dashboard/sessions/summery/${sessionId}`);
   };
-
-  getSessionDetails();
-}, [sessionId, userId]); 
-
-
-const endSession=()=>{
-  router.push(`/u/dashboard/sessions/summery/${sessionId}`)
-}
 
   useEffect(() => {
     const getUserMedia = async () => {
@@ -411,9 +410,9 @@ const endSession=()=>{
       // Run async code outside of the event handler
       (async () => {
         const message = await transcribeAudio(audioBlob);
-        
+
         try {
-          const response = await axios.post('/api/c/chat', { message,sessionId ,prompt});
+          const response = await axios.post('/api/c/chat', { message, sessionId, prompt });
           if (response.data?.response) {
             speakText(response.data.response);
           }
@@ -587,8 +586,8 @@ const endSession=()=>{
               >
                 {isSpeaking ? <StopCircle /> : isRecording ? <StopCircle /> : <PlayCircleIcon />}
               </Button>
-              <Button onClick={endSession} className='bg-red-500'>
-                  End Session
+              <Button onClick={endSession} className="bg-red-500">
+                End Session
               </Button>
             </CardFooter>
           </Card>

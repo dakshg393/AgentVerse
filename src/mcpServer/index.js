@@ -12,9 +12,6 @@ const server = new McpServer({
 
 const app = express();
 
-
-
-
 server.tool(
   'addTwoNumbers',
   'Add two numbers',
@@ -41,9 +38,9 @@ const transports = {};
 
 app.get('/sse', async (req, res) => {
   const transport = new SSEServerTransport('/messages', res);
-  
+
   transports[transport.sessionId] = transport;
-  
+
   console.log('New client connected with sessionId:', transport.sessionId);
   res.on('close', () => {
     delete transports[transport.sessionId];
@@ -65,7 +62,6 @@ app.post('/messages', async (req, res) => {
 app.listen(3001, () => {
   console.log('Server is running on http://localhost:3001');
 });
-
 
 // import express from 'express';
 // import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';

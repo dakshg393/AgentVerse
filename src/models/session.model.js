@@ -24,18 +24,17 @@ const sessionSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       refPath: 'agentTypeRef', // dynamically refer to correct model
     },
-    status:{
+    status: {
       type: String,
-      enum:['Start','Resume','End'],
-      default:'Start'
+      enum: ['Start', 'Resume', 'End'],
+      default: 'Start',
     },
-    prompt:{
-      type:String,
+    prompt: {
+      type: String,
     },
-    summery:{
-      type:String
+    summery: {
+      type: String,
     },
-    
   },
   { timestamps: true }
 );

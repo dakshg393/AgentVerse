@@ -5,15 +5,14 @@ import User from '@/models/user.model.js';
 import { generateAccessAndRefreshToken } from '@/helpers/generateAccAndRefToken.helpers';
 import ms from 'ms'; //ms is used to conver 1d into milisecond
 
-
 dbConnect();
 
 export const POST = async (request: NextRequest) => {
   try {
-        const accessTokenExpiry:number = ms(process.env.ACCESS_TOKEN_EXPIRY || '1d') as number;
-        const refreshTokenExpiry:number = ms(process.env.REFRESH_TOKEN_EXPIRY || '7d') as number;
-        console.log("Access token expirey ",accessTokenExpiry)
-        console.log('Type of accessTokenExpiry:', typeof accessTokenExpiry);
+    const accessTokenExpiry: number = ms(process.env.ACCESS_TOKEN_EXPIRY || '1d') as number;
+    const refreshTokenExpiry: number = ms(process.env.REFRESH_TOKEN_EXPIRY || '7d') as number;
+    console.log('Access token expirey ', accessTokenExpiry);
+    console.log('Type of accessTokenExpiry:', typeof accessTokenExpiry);
     const reqBody = await request.json();
     const { email, password } = reqBody;
     console.log(1);

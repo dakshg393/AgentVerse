@@ -135,8 +135,6 @@
 //   }
 // }
 
-
-
 import { dbConnect } from '@/dbConfig/dbConfig';
 import User from '@/models/user.model';
 import { NextRequest, NextResponse } from 'next/server';
@@ -151,7 +149,10 @@ export async function GET(request: NextRequest) {
 
   // Case 1: both tokens are invalid or expired → force logout
   if (!decodedAcc && !decodedRef) {
-    const response = NextResponse.json({ error: 'Authentication required. Please login again.' }, { status: 401 });
+    const response = NextResponse.json(
+      { error: 'Authentication required. Please login again.' },
+      { status: 401 }
+    );
 
     response.cookies.set('accessToken', '', {
       httpOnly: true,
@@ -183,7 +184,10 @@ export async function GET(request: NextRequest) {
 
     if (!user || user.refreshToken !== token) {
       // Refresh token is invalid → force logout
-      const response = NextResponse.json({ error: 'Invalid refresh token. Please login again.' }, { status: 403 });
+      const response = NextResponse.json(
+        { error: 'Invalid refresh token. Please login again.' },
+        { status: 403 }
+      );
 
       response.cookies.set('accessToken', '', {
         httpOnly: true,
@@ -228,7 +232,6 @@ export async function GET(request: NextRequest) {
   }
 }
 
-
 // export async function POST(request:NextRequest) {
 //   const {fullName,_id}= await request.json()
 //   try {
@@ -237,9 +240,9 @@ export async function GET(request: NextRequest) {
 //     }
 
 //    const updatedUser = await User.findByIdAndUpdate(
-//   _id,                
-//   { fullName },       
-//   { new: true }     
+//   _id,
+//   { fullName },
+//   { new: true }
 //   );
 
 //   return NextResponse.json({message:"User Updated Successfully ",data:updatedUser},{status:404})

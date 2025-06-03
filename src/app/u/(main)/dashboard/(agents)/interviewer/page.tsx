@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import useUserStore from '@/store/userStore';
 import toast from 'react-hot-toast';
-import {generateInterviewPrompt} from '@/lib/client/generateInterviewPrompt';
+import { generateInterviewPrompt } from '@/lib/client/generateInterviewPrompt';
 
 interface InterviewDetails {
   jobTitle: string;
@@ -39,9 +39,9 @@ export default function InterviewSession() {
 
   const onSubmit = async (data: InterviewDetails) => {
     try {
-      const prompt=generateInterviewPrompt(data)
-      console.log(prompt)
-      const response = await axios.post('/api/c/c/agents/interviewAgent', { data,user,prompt });
+      const prompt = generateInterviewPrompt(data);
+      console.log(prompt);
+      const response = await axios.post('/api/c/c/agents/interviewAgent', { data, user, prompt });
       toast.success(response.data.message);
       router.push(`/u/dashboard/sessions/session/${response?.data?.data?._id}`);
     } catch (error) {
@@ -86,13 +86,17 @@ export default function InterviewSession() {
 
           <div className="w-full md:w-[45%] h-full flex flex-col gap-2 p-4">
             <Label>Choose Your Avatar</Label>
-            <RadioGroup
-              defaultValue="male"
-              className="flex gap-4 overflow-y-scroll no-scrollbar"
-            >
+            <RadioGroup defaultValue="male" className="flex gap-4 overflow-y-scroll no-scrollbar">
               <label className="cursor-pointer">
-                <input type="radio" value="male" className="hidden" {...register('avatar', { required: 'Avatar is required' })} />
-                <Avatar className={`rounded-sm h-18 w-28 border-2 ${selectedAvatar === 'male' ? 'border-amber-500' : 'border-transparent'}`}>
+                <input
+                  type="radio"
+                  value="male"
+                  className="hidden"
+                  {...register('avatar', { required: 'Avatar is required' })}
+                />
+                <Avatar
+                  className={`rounded-sm h-18 w-28 border-2 ${selectedAvatar === 'male' ? 'border-amber-500' : 'border-transparent'}`}
+                >
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
@@ -100,7 +104,9 @@ export default function InterviewSession() {
 
               <label className="cursor-pointer">
                 <input type="radio" value="female" className="hidden" {...register('avatar')} />
-                <Avatar className={`rounded-sm h-18 w-28 border-2 ${selectedAvatar === 'female' ? 'border-amber-500' : 'border-transparent'}`}>
+                <Avatar
+                  className={`rounded-sm h-18 w-28 border-2 ${selectedAvatar === 'female' ? 'border-amber-500' : 'border-transparent'}`}
+                >
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>

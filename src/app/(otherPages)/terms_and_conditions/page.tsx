@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import Footer from "@/components/Footer"
+import Footer from '@/components/Footer';
 
-export default function(){
-    return(
-        <section>
-            <div>
-
-            </div>
-            <Footer/>
-        </section>
-    )
+export default function TermsAndConditions() {
+  return (
+    <section>
+      <div>
+        Here are terms and condition for this app
+      </div>
+      <Footer />
+    </section>
+  );
 }

@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle } from '@/components/(shadcn)/ui/card';
 import { useRouter } from 'next/navigation';
 import { aiServices } from '@/utils/dashbord.utils';
 import { useEffect, useRef, useState } from 'react';
-import {clear} from 'console';
+import { clear } from 'console';
 // import * as THREE from 'three';
 // import HALO from 'vanta/dist/vanta.halo.min';
 
@@ -60,16 +60,11 @@ export default function Dashboard() {
             onClick={() => router.push(service.href)}
           >
             <CardHeader className="flex flex-col items-center">
-              <span
-                className="p-4 rounded-full"
-                style={{ backgroundImage: service.color }}
-              >
+              <span className="p-4 rounded-full" style={{ backgroundImage: service.color }}>
                 <service.icon size={30} />
               </span>
 
-              <CardTitle className="mt-2 text-lg font-semibold">
-                {service.title || ''}
-              </CardTitle>
+              <CardTitle className="mt-2 text-lg font-semibold">{service.title || ''}</CardTitle>
               <p>{service.tagline || ''}</p>
             </CardHeader>
           </Card>

@@ -10,8 +10,7 @@ const historySchema = new Schema(
     owner: {
       type: 'String',
     },
-    History: []
-    
+    History: [],
   },
   { timestamps: true }
 );
@@ -19,4 +18,3 @@ const historySchema = new Schema(
 const History = mongoose.models.Historys || mongoose.model('Historys', historySchema);
 
 export default History;
-

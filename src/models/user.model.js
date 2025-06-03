@@ -29,7 +29,7 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-    }
+    },
   },
   { timestamps: true }
 );

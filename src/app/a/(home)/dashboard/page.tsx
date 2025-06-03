@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button } from '@/components/(shadcn)/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/(shadcn)/ui/card';
 import {
   Table,
   TableHeader,

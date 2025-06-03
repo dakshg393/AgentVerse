@@ -12,18 +12,11 @@ export async function POST(request: NextRequest) {
     const { userId, type } = body;
 
     if (!userId || !type) {
-      return NextResponse.json(
-        { error: 'userId and type are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'userId and type are required' }, { status: 400 });
     }
 
     // 2. Update the user's subscription type (assuming 'type' means subscription type)
-    const subscribe = await User.findByIdAndUpdate(
-      userId,
-      { subscription: type },
-      { new: true }
-    );
+    const subscribe = await User.findByIdAndUpdate(userId, { subscription: type }, { new: true });
 
     if (!subscribe) {
       return NextResponse.json(
@@ -31,8 +24,6 @@ export async function POST(request: NextRequest) {
         { status: 404 }
       );
     }
-
-   
 
     // 4. Return the sessions with a 200 status
     return NextResponse.json(

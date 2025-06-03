@@ -1,4 +1,3 @@
-
 // export function generateInterviewPrompt(details: {
 //   jobTitle: string;
 //   jobDiscription: string;
@@ -30,7 +29,6 @@
 // Start the interview now.
 //   `.trim();
 // }
-
 
 export function generateInterviewPrompt(details: {
   jobTitle: string;

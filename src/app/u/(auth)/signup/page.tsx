@@ -36,7 +36,7 @@ export default function SignupPage() {
 
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message || 'Something went wrong');
-      }else{
+      } else {
         // Handle network errors or other unexpected errors
         toast.error('Network error or server is down.');
         console.log('Network error:');
@@ -101,4 +101,3 @@ export default function SignupPage() {
     </div>
   );
 }
-

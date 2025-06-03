@@ -16,13 +16,11 @@ import useUserStore from '@/store/userStore';
 import { transactions } from '@/utils/profile.utils';
 import { v4 as uuidv4 } from 'uuid';
 
-
 interface Transaction {
   _id: string;
   amount: number;
-  plantype: string; 
+  plantype: string;
   invoice: string;
-
 }
 export default function ProfilePage() {
   const user = useUserStore((state) => state.user);
@@ -31,7 +29,7 @@ export default function ProfilePage() {
   return (
     <section className="flex items-center  flex-col min-h-screen mb-16 mt-10">
       <span className="flex flex-col items-start justify-start w-[80%]">
-        <h1 className="text-3xl font-semibold">Hello  {user?.fullName}</h1>
+        <h1 className="text-3xl font-semibold">Hello {user?.fullName}</h1>
         <h1 className="">{user?.email}</h1>
       </span>
       <div
@@ -74,7 +72,7 @@ export default function ProfilePage() {
             <h1>Current Subscription</h1>
             <span className="flex items-center justify-between">
               <span>
-                <h1>{user?.subscription || "Free"}</h1>
+                <h1>{user?.subscription || 'Free'}</h1>
                 <h2>End of Plan -</h2>
               </span>
               <Button>Upgrade Plan</Button>

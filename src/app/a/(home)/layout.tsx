@@ -55,10 +55,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                           ${isActive ? ' text-pink-600 font-semibold' : ''}
                         `}
                       >
-                         <div className="flex items-center justify-center flex-row gap-2">
-                        <item.icon size={5} className={`${isActive ? 'text-[#ff007f] ' : ''}`} />
-                        {isNavOpen && <span className="hidden sm:flex">{item.title}</span>}
-                      </div>
+                        <div className="flex items-center justify-center flex-row gap-2">
+                          <item.icon size={5} className={`${isActive ? 'text-[#ff007f] ' : ''}`} />
+                          {isNavOpen && <span className="hidden sm:flex">{item.title}</span>}
+                        </div>
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>

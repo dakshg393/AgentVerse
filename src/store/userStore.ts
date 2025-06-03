@@ -22,7 +22,7 @@ const useUserStore = create<UserStore>((set) => ({
   user: null,
   loadingUser: false,
 
-  setUser: async (user:User) => {
+  setUser: async (user: User) => {
     set({ user: user });
   },
 
@@ -36,7 +36,7 @@ const useUserStore = create<UserStore>((set) => ({
     } catch (err) {
       console.log(`here this is error ${err}`);
       set({ user: null, loadingUser: false });
-      return null
+      return null;
     }
   },
 

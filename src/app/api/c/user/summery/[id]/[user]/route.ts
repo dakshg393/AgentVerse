@@ -12,7 +12,6 @@
 //   try {
 //     const { id, user } =await context.params;
 
-
 //     // 🔍 Check if summary already exists
 //     const existingSession = await Session.findOne({ sessionId: id });
 //     if (existingSession?.summery) {
@@ -29,7 +28,7 @@
 //     const historyKey = `chat:${id}`;
 //     const historyJSON = await redis.get(historyKey);
 //     let chatHistory = historyJSON ? JSON.parse(historyJSON) : [];
-    
+
 //     // 💾 Save to DB if available in Redis
 //     if (chatHistory) {
 //       await History.create({
@@ -45,42 +44,35 @@
 //     }
 
 //     // 📄 Generate summary
-    
-
-
-
-
-
 
 //     let aiInstance:GoogleGenAI;
 
 //     aiInstance = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    
-   
+
 //         const prompt = `You are an AI interview analyzer. Given the following interview histroy  for the role of "${}", generate a structured summary in this exact format:
 
 // ---
 // **Role**: [Job Role]
 
-// **Overall Feedback**:  
+// **Overall Feedback**:
 // [2–3 line overall feedback about the candidate]
 
 // ---
 
-// **Communication Skills**:  
-// [2–3 lines on communication quality]  
+// **Communication Skills**:
+// [2–3 lines on communication quality]
 // **Score**: [X / 100]
 
-// **Technical Knowledge**:  
-// [2–3 lines on technical depth]  
+// **Technical Knowledge**:
+// [2–3 lines on technical depth]
 // **Score**: [X / 100]
 
-// **Problem-Solving**:  
-// [2–3 lines on how they solved problems]  
+// **Problem-Solving**:
+// [2–3 lines on how they solved problems]
 // **Score**: [X / 100]
 
-// **Team Collaboration**:  
-// [2–3 lines on teamwork experience or attitude]  
+// **Team Collaboration**:
+// [2–3 lines on teamwork experience or attitude]
 // **Score**: [X / 100]
 
 // ---
@@ -104,18 +96,13 @@
 //         },
 //       ],
 //     }, [...chatHistory]],
-        
+
 //       });
-
-
 
 //      const candidate = response.candidates[0].content;
 //       const part = candidate.parts[0];
 //       const responseText = part.text;
-      
 
-
-    
 //     // const summery = await generateSummary(chatHistory,"Software");
 //      const updatedSummery = await Session.findOneAndUpdate({_id})
 
@@ -148,7 +135,6 @@
 //   }
 // }
 
-
 import { dbConnect } from '@/dbConfig/dbConfig';
 import redis from '@/lib/server/redis';
 import Session from '@/models/session.model';
@@ -159,8 +145,8 @@ import { GoogleGenAI } from '@google/genai';
 dbConnect();
 
 export async function GET(req: Request, context: RouteContext) {
-  try{
-    const { id, user } =await context.params;
+  try {
+    const { id, user } = await context.params;
 
     // 🔍 Check if summary already exists
     const existingSession = await Session.findOne({ sessionId: id });
@@ -194,7 +180,7 @@ export async function GET(req: Request, context: RouteContext) {
     // }
 
     // 📄 Generate summary
-    let aiInstance:GoogleGenAI;
+    let aiInstance: GoogleGenAI;
     aiInstance = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 
     const prompt = `
@@ -234,17 +220,17 @@ You are an AI interview analyzer. Given the following interview history for the 
 - [Point 5]
 `;
 
-    
-const formattedHistory = chatHistory.map((msg: any) => `${msg.role}: ${msg.content}`).join('\n');
- 
+    const formattedHistory = chatHistory
+      .map((msg: any) => `${msg.role}: ${msg.content}`)
+      .join('\n');
+
     const response = await aiInstance.models.generateContent({
-        model: 'gemini-2.0-flash',
+      model: 'gemini-2.0-flash',
       contents: [{ role: 'user', parts: [{ text: `${prompt}\n\n${formattedHistory}` }] }],
     });
 
-
     const responseText = response?.candidates?.[0]?.content?.parts?.[0]?.text;
-    console.log(responseText)
+    console.log(responseText);
     if (!responseText) {
       return NextResponse.json({ error: 'AI did not return a valid summary' }, { status: 500 });
     }
@@ -260,7 +246,7 @@ const formattedHistory = chatHistory.map((msg: any) => `${msg.role}: ${msg.conte
       },
       { new: true }
     );
-    console.log(JSON.stringify("Here is updated histroy",updatedSession))
+    console.log(JSON.stringify('Here is updated histroy', updatedSession));
     return NextResponse.json(
       {
         data: responseText,
