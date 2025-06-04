@@ -43,7 +43,12 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const isPublicPath = ['/u/login', '/u/signup', '/'].includes(path);
+  const isPublicPath =
+    path === '/u/login' ||
+    path === '/u/signup' ||
+    path === '/' ||
+    path.startsWith('/u/forgetpassword');
+  // const isPublicPath = ['/u/login', '/u/signup','/u/forgetpassword/','/'].includes(path);
   const accessToken = request.cookies.get('accessToken')?.value;
   const refreshToken = request.cookies.get('refreshToken')?.value;
 

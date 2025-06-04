@@ -29,4 +29,32 @@ async function sendOtpEmail(toEmail, otp) {
   }
 }
 
-export  {sendOtpEmail}
+async function sendResetPasswordEmail(toEmail, token) {
+  const resetLink = `${process.env.DOMAIN}/forgetpassword/${token}`;
+  const mailOptions = {
+    from: `"AgentVerse" <${process.env.EMAIL_USER}>`,
+    to: toEmail,
+    subject: 'Your Reset Password Link to reset AgentVerse Password',
+    html: `
+      <h3>Click Here to Reset Password: 
+      <strong>
+        <a href=${resetLink}>
+          Reset Password
+        </a>
+      </strong>
+      </h3>
+      <p>This Link is valid for 10 minutes.</p>`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+
+    console.log(`Reset password Mail send to ${resetLink}`);
+    return true;
+  } catch (error) {
+    console.error('Error sending Reset Password email:', error);
+    return false;
+  }
+}
+
+export  {sendOtpEmail,sendResetPasswordEmail}

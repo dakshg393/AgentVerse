@@ -11,11 +11,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   const user = useUserStore((state) => state.user);
 
   useEffect(() => {
-    if (!user) {
-      toast.error('Please login to continue');
-      router.push('/login');
-      return;
-    }
+  
 
     if (user && !user.isVerified && pathname !== '/u/verify') {
       toast.error('Please verify your email');
