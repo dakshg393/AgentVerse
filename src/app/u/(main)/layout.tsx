@@ -1,5 +1,5 @@
 'use client';
-
+import Logo from '@/'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/(shadcn)/ui/avatar';
 import {
   NavigationMenu,
@@ -106,7 +106,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <NavigationMenuItem className="border-r-2 border-pink-600  sm:flex  pr-4">
               <Link href="/u/dashboard" legacyBehavior passHref className="bg-transparent">
                 <Avatar className="bg-transparent">
-                  <AvatarImage className="bg-transparent" src="/logo.jpeg" />
+                  <AvatarImage className="bg-transparent" src="/Logo.jpeg" />
                   <AvatarFallback className="bg-transparent">AV</AvatarFallback>
                 </Avatar>
               </Link>

@@ -318,7 +318,10 @@ export default function LandingPage() {
             Get instant insights from legal, health, finance, education, and interview specialists —
             all in one place. Smarter decisions start here.
           </p>
-          <Button>Get Started for Free</Button>
+          <Link href="/u/signup" passHref legacyBehavior>
+            <Button >Get Started for Free</Button>
+          </Link>
+         
         </div>
 
         {/* <footer className=" bottom-0 w-full h-80 py-4 px-4 text-center bg-gradient-to-b  to-pink-500 flex flex-col items-center justify-center backdrop-blur-4xl border-t dark:border-white rounded-t-3xl">
