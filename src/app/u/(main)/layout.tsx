@@ -29,6 +29,7 @@ import useUserStore from '@/store/userStore';
 import { useEffect, useState } from 'react';
 import useLoadingStore from '@/store/loadingStore';
 import { clear } from 'console';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
@@ -60,11 +61,19 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         setLoading(true);
 
         const fetchedUser = await getUser();
+        
         console.log(fetchUser);
         if (fetchedUser === null) {
           router.push('/login');
         } else {
+          
           setUser(fetchedUser);
+
+          if (fetchedUser?.isVerified !== true) {
+            router.push('/u/verify');
+          }
+
+         
         }
       } catch (error) {
         toast.error('Please login to continue');
@@ -84,7 +93,10 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
     <div className="h-screen w-full flex flex-col  ">
       {/* Main Content */}
-      <main className="flex-1  overflow-auto   ">{children}</main>
+      <main className="flex-1  overflow-auto   ">
+        <ProtectedRoute> {children}</ProtectedRoute>
+       
+      </main>
 
       {/* Bottom Navigation (Fixed) */}
       <nav className=" flex items-center justify-center fixed bottom-0 md:bottom-4 left-1/2 transform -translate-x-1/2 p-4  rounded-lg shadow-lg border-2  w-full sm:w-auto backdrop-blur-3xl z-100">

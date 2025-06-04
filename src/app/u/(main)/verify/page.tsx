@@ -26,6 +26,8 @@ import {
 import {REGEXP_ONLY_DIGITS} from 'input-otp';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import {useRouter} from 'next/navigation';
+
 
 const otpSchema = z.object({
   otp: z.string().length(6, 'OTP must be 6 digits').regex(/^\d+$/, 'OTP must contain only digits'),
@@ -34,12 +36,23 @@ const otpSchema = z.object({
 type FormData = z.infer<typeof otpSchema>;
 
 export default function VerificationPage() {
+
   const user = useUserStore((state) => state?.user);
   const [value, setValue] = useState("")
   const [isOtpSend,setOtpSend] = useState(false)
   const [timer,setTimer] = useState(0)
   const [message,setMessage] = useState("")
   const [isDisabled, setIsDisabled] = useState(false);
+  const router = useRouter()
+
+  useEffect(()=>{
+    if(user?.isVerified ==true){
+      router.push('/u/dashboard')
+    }
+  })
+
+
+
    useEffect(() => {
     let interval;
     if (timer > 0) {
@@ -55,6 +68,7 @@ export default function VerificationPage() {
   // Start resend timer on mount or when otpSent changes
 
   const sendOtp=async()=>{
+    
     if(timer===0){
       setIsDisabled(true)
       const getOtp = await axios.get(`/api/c/auth/verify/${user?._id}`);
@@ -74,6 +88,7 @@ export default function VerificationPage() {
         console.log(response.data)
         setValue("")
         toast.success("Otp Verified Successfully")
+        router.push('/u/dashboard')
       }else{
         toast.error("Please Enter the Otp")
       }

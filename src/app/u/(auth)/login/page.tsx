@@ -8,12 +8,14 @@ import { Button } from '@/components/(shadcn)/ui/button';
 import { Input } from '@/components/(shadcn)/ui/input';
 import { Label } from '@/components/(shadcn)/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/(shadcn)/ui/card';
+import useUserStore from '@/store/userStore';
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const setUser = useUserStore((state)=>state.setUser)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +23,8 @@ export default function LoginPage() {
     try {
       setLoading(true);
       const response = await axios.post('/api/c/auth/login', { email, password });
+      console.log("Here is login response",response.data.data)
+      setUser(response?.data.data)
       toast.success(response.data.message || 'Login successful');
       router.push('/u/dashboard');
     } catch (error: unknown) {
