@@ -2,6 +2,7 @@ import express from 'express';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import { z } from 'zod';
+import cors from 'cors'
 
 const server = new McpServer({
   name: 'example-server',
@@ -10,7 +11,19 @@ const server = new McpServer({
 
 // ... set up server resources, tools, and prompts ...
 
+
+
 const app = express();
+
+
+const allowedOrigin  = 'https://agentverse-chi.vercel.app/'
+
+app.use(cors({
+  origin:allowedOrigin,
+  credentials:true
+}))
+
+app.use(express.json());
 
 server.tool(
   'addTwoNumbers',
@@ -59,7 +72,7 @@ app.post('/messages', async (req, res) => {
   }
 });
 
-app.listen(3001, () => {
+app.listen(process.env.PORT, () => {
   console.log('Server is running on http://localhost:3001');
 });
 
