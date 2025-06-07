@@ -136,6 +136,6 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error: 'Failed to process chat request' }, { status: 500 });
+    return NextResponse.json({ error: `Failed to process chat request ${error}` }, { status: 500 });
   }
 }
