@@ -7,16 +7,18 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useParams, useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
+import useLoadingStore from '@/store/loadingStore';
 
 export default function SummeryPage() {
   const [sessionSummery, setSessionSummery] = useState('');
   const params = useParams();
   const sessionId = params.id;
   const userId = useUserStore((state) => state.user?._id);
-
+  const setLoading  = useLoadingStore((state)=> state.setLoading)
   useEffect(() => {
     const getSessionSummery = async () => {
       try {
+        
         const summery = await axios.get(`/api/c/user/summery/${sessionId}/${userId}`);
         console.log(summery.data.data);
         setSessionSummery(summery.data.data);

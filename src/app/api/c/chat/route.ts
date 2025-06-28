@@ -3,8 +3,9 @@ import { NextResponse } from 'next/server';
 import { Client } from '@modelcontextprotocol/sdk/client';
 import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse';
 import { GoogleGenAI } from '@google/genai';
-//import redis from '@/lib/redis';
+// import redis from '@/lib/redis';
 import redis from '@/lib/server/redis';
+
 
 let mcpClient: Client;
 let aiInstance: GoogleGenAI;
@@ -51,7 +52,7 @@ export async function POST(req: Request) {
     // await initializeMCP();
 
     const { message, sessionId, prompt } = await req.json();
-    console.log(`Here are json details ${message} session id ${sessionId} ${prompt}, ${message}`);
+    // console.log(`Here are json details ${message} session id ${sessionId} ${prompt}, ${message}`);
 
     await initializeMCP(sessionId);
 
