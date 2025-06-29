@@ -99,11 +99,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       </main>
 
       {/* Bottom Navigation (Fixed) */}
-      <nav className=" flex items-center justify-center fixed bottom-0 md:bottom-4 left-1/2 transform -translate-x-1/2 p-4  rounded-lg shadow-lg border-2  w-full sm:w-auto backdrop-blur-3xl z-100">
+      <nav className=" flex items-center justify-center fixed bottom-0 md:bottom-4 left-1/2 transform -translate-x-1/2 p-4  rounded-lg shadow-lg border-2 m-2 w-full sm:w-auto backdrop-blur-3xl z-100">
         <NavigationMenu>
           <NavigationMenuList className="flex flex-wrap justify-center md:flex-nowrap gap-2 md:gap-4">
             {/* Profile Avatar */}
-            <NavigationMenuItem className="border-r-2 border-pink-600  sm:flex  pr-4">
+            <NavigationMenuItem className="border-r-2 border-theme-color  sm:flex  pr-4">
               <Link href="/u/dashboard" legacyBehavior passHref className="bg-transparent">
                 <Avatar className="bg-transparent">
                   <AvatarImage className="bg-transparent" src="/Logo.jpeg" />
@@ -116,13 +116,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             {navItems.map((item, index) => {
               const isActive = item.href === pathName;
               return (
-                <NavigationMenuItem key={index} className={`${isActive ? 'text-[#ff007f]' : ''}`}>
+                <NavigationMenuItem key={index} className={`${isActive ? 'text-theme-color' : ''}`}>
                   <Link href={item.href} legacyBehavior passHref className="">
                     <NavigationMenuLink
                       className={`${navigationMenuTriggerStyle()} flex items-center justify-center bg-transparent  flex-col `}
                     >
                       <div className="flex items-center justify-center flex-col">
-                        <item.icon size={5} className={`${isActive ? 'text-[#ff007f] ' : ''}`} />
+                        <item.icon size={5} className={`${isActive ? 'text-theme-color ' : ''}`} />
                         <span className="hidden sm:flex">{item.title}</span>
                       </div>
                     </NavigationMenuLink>
@@ -132,13 +132,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             })}
 
             {/* Notifications Icon */}
-            <NavigationMenuItem className="border-l-2">
+            <NavigationMenuItem className="border-l-2 border-theme-color">
               <NavigationMenuLink
                 className={`${navigationMenuTriggerStyle()} bg-transparent hover:bg-transparent `}
               >
                 <DropdownMenu>
                   <DropdownMenuTrigger>
-                    <Bell size={20} className={`hover:text-[#ff007f]  hover:cursor-pointer`} />
+                    <Bell size={20} className={`hover:text-theme-color hover:cursor-pointer`} />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="z-110">
                     <DropdownMenuLabel className="p-4">
@@ -166,7 +166,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   <DropdownMenuTrigger>
                     <Settings
                       size={50}
-                      className={`hover:text-[#ff007f]   hover:cursor-pointer `}
+                      className={`hover:text-theme-color   hover:cursor-pointer `}
                     />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="z-110">
@@ -179,8 +179,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                       className="p-4 border-b-2  cursor-pointer"
                       onClick={() => router.push('/u/dashboard/profile')}
                     >
-                      <span className="flex items-center gap-2 hover:text-[#ff007f]">
-                        <User className="hover:text-[#ff007f]" />
+                      <span className="flex items-center gap-2 hover:text-theme-color">
+                        <User className="hover:text-theme-color" />
                         Profile
                       </span>
                     </DropdownMenuItem>
@@ -188,17 +188,17 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                       className="p-4 border-b-2  cursor-pointer"
                       onClick={() => router.push('/u/dashboard/profile/#subscription')}
                     >
-                      <span className="flex items-center gap-2 hover:text-[#ff007f]">
-                        <CreditCard className="hover:text-[#ff007f]" />
+                      <span className="flex items-center gap-2 hover:text-theme-color">
+                        <CreditCard className="hover:text-theme-color" />
                         Billing
                       </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="p-4 hover:text-[#ff007f] cursor-pointer "
+                      className="p-4 hover:text-theme-color cursor-pointer "
                       onClick={handleLogout}
                     >
-                      <span className="flex items-center gap-2 hover:text-[#ff007f]">
-                        <LogOut className="hover:text-[#ff007f]" />
+                      <span className="flex items-center gap-2 hover:text-theme-color">
+                        <LogOut className="hover:text-theme-color" />
                         Logout
                       </span>
                     </DropdownMenuItem>

@@ -77,17 +77,17 @@ export default function LandingPage() {
             <NavigationMenuItem>
               <Link href="/u/login" passHref legacyBehavior>
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} bg-transparent font-bold text-md hover:bg-transparent hover:text-pink-400 hover:underline decoration-2 underline-offset-8`}
+                  className={`${navigationMenuTriggerStyle()} bg-transparent font-bold text-md hover:bg-transparent hover:text-theme-color hover:underline decoration-2 underline-offset-8`}
                 >
                   Login
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
 
-            <NavigationMenuItem className="hover:shadow-pink-400/50">
+            <NavigationMenuItem className="hover:shadow-theme-color/50">
               <Link href="/u/signup" passHref legacyBehavior>
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} bg-pink-400 hover:bg-pink-400 hover:shadow-md hover:shadow-pink-400/50 transition`}
+                  className={`${navigationMenuTriggerStyle()} bg-theme-color hover:bg-theme-color hover:shadow-md hover:shadow-theme-color transition`}
                 >
                   <h1>Try It Out</h1>
                 </NavigationMenuLink>
@@ -102,7 +102,7 @@ export default function LandingPage() {
         <div className="h-[70vh] w-[90%] flex items-center justify-center flex-col ">
           <h1 className="text-4xl sm:text-5xl md:text-8xl font-extrabold text-center mt-12 md:mt-0">
             Experience the Power of <br /> Human-like{' '}
-            <span className="text-pink-500">AI Interaction</span>
+            <span className="text-theme-color">AI Interaction</span>
           </h1>
           <p className="mt-10 text-center max-w-xl text-lg text-gray-300">
             AgentVerse brings intelligent conversations to life. Interact with customizable AI
@@ -187,7 +187,7 @@ export default function LandingPage() {
         <div className="rounded-2xl border-2 overflow-x-auto w-[80%] ">
           <Table className="overflow-scroll max-[80%]">
             <TableHeader className="border-b-2">
-              <TableRow className="bg-pink-500 hover:bg-pink-500">
+              <TableRow className="bg-theme-color hover:bg-theme-color">
                 <TableHead className="p-8">Feature</TableHead>
                 <TableHead className="p-8">AgentVerse</TableHead>
                 <TableHead className="p-8">ChatGPT</TableHead>
@@ -324,33 +324,9 @@ export default function LandingPage() {
          
         </div>
 
-        {/* <footer className=" bottom-0 w-full h-80 py-4 px-4 text-center bg-gradient-to-b  to-pink-500 flex flex-col items-center justify-center backdrop-blur-4xl border-t dark:border-white rounded-t-3xl">
-  <div className="flex flex-col items-center justify-center gap-4 w-full">
-    <div className="flex flex-wrap items-center justify-center gap-8 text-sm sm:text-base text-gray-700 ">
-      <p className="hover:text-white hover:cursor-pointer">Contact Us</p>
-      <p className="hover:text-white hover:cursor-pointer">Terms & Conditions</p>
-      <p className="hover:text-white hover:cursor-pointer">Privacy Policy</p>
-    </div>
-
-    <h1 className="font-extrabold text-4xl sm:text-6xl md:text-8xl lg:text-9xl p-4 bg-gradient-to-b from-pink-500 to-white bg-clip-text text-transparent break-words text-center">
-      AgentVerse
-    </h1>
-  </div>
-</footer> */}
+      
       </section>
-      {/* <footer className=" bottom-0 w-full h-80 py-4 px-4 text-center bg-gradient-to-b  to-pink-500 flex flex-col items-center justify-center backdrop-blur-4xl border-t dark:border-white rounded-t-3xl">
-        <div className="flex flex-col items-center justify-center gap-4 w-full">
-          <div className="flex flex-wrap items-center justify-center gap-8 text-sm sm:text-base text-gray-700 ">
-            <p className="hover:text-white hover:cursor-pointer">Contact Us</p>
-            <p className="hover:text-white hover:cursor-pointer">Terms & Conditions</p>
-            <p className="hover:text-white hover:cursor-pointer">Privacy Policy</p>
-          </div>
-
-          <h1 className="font-extrabold text-4xl sm:text-6xl md:text-8xl lg:text-9xl p-4 bg-gradient-to-b from-pink-500 to-white bg-clip-text text-transparent break-words text-center">
-            AgentVerse
-          </h1>
-        </div>
-      </footer> */}
+     
       <Footer />
     </div>
   );

@@ -414,7 +414,9 @@ export default function InterviewPage() {
         try {
           const response = await axios.post('/api/c/chat', { message, sessionId, prompt });
           if (response.data?.response) {
+            console.log(response.data.response)
             speakText(response.data.response);
+            setTranscription(response.data.response)
           }
         } catch (error) {
           console.log('API call failed:', error);

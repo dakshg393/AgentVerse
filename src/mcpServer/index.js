@@ -72,7 +72,7 @@ app.post('/messages', async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 10000 , () => {
+app.listen(3001 , () => {
   console.log('Server is running on http://localhost:3001');
 });
 
